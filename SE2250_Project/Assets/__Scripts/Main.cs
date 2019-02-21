@@ -18,7 +18,7 @@ public class Main : MonoBehaviour
     {
         S = this;
         bndCheck = GetComponent<BoundsCheck>();
-        Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
+        Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
     }
 
     public void SpawnEnemy()
@@ -37,7 +37,7 @@ public class Main : MonoBehaviour
         pos.y = bndCheck.camHeight + enemyPadding;
         go.transform.position = pos;
 
-        Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
+        Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
     }
 
 }
