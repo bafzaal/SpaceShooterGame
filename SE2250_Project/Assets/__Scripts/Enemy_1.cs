@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Enemy_1 : Enemy
 {
-    bool hitRight = false;
-    
+    private int _randomDirection;
+
+    void Start()
+    {
+        _randomDirection = Random.Range(0, 2);
+    }
+
     public override void Move()
     {
         Vector3 tempPos = pos;
         tempPos.y -=  Mathf.Sin(45f) * (speed * Time.deltaTime);
-        if(hitRight == false)
+
+        if(_randomDirection == 0)
         {
             tempPos.x += Mathf.Cos(45f) * (speed * Time.deltaTime);
         }
@@ -19,9 +25,9 @@ public class Enemy_1 : Enemy
             tempPos.x -= Mathf.Cos(45f) * (speed * Time.deltaTime);
         }
         if (tempPos.x >= 27f)
-            hitRight = true;
+            _randomDirection = 1;
         if (tempPos.x <= -27)
-            hitRight = false;
+            _randomDirection = 0;
 
         pos = tempPos;
     }

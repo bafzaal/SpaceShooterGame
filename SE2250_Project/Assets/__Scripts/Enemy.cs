@@ -8,14 +8,14 @@ public class Enemy : MonoBehaviour
     [Header("Set In Inspector: Enemy")]
     public float speed = 10f; // Speed in m/s
     public float fireRate = 0.3f; // Seconds/shto (Unused)
-    public float health = 10;
-    public int score = 100; // Points earned for destroying this
+    public float health = 10; // (Unused Currently)
+    public int score = 100; // Points earned for destroying this (Unused Currently)
 
-    private BoundsCheck bndCheck;
+    private BoundsCheck _bndCheck;
 
     void Awake()
     {
-        bndCheck = GetComponent<BoundsCheck>();
+        _bndCheck = GetComponent<BoundsCheck>();
     }
 
     // This is a Property: A method that acts like a field
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
     {
         Move();
 
-        if(bndCheck != null && bndCheck.offDown)
+        if(_bndCheck != null && _bndCheck.offDown)
         {
             // Enemy has gone off the bottom of the screen so destroy it
             Destroy(gameObject);

@@ -53,6 +53,8 @@ public class BoundsCheck : MonoBehaviour
             offDown = true;
         }
 
+        isOnScreen = !(offRight || offLeft || offUp || offDown);
+
         if(keepOnScreen && !isOnScreen)
         {
             transform.position = pos;
@@ -73,15 +75,4 @@ public class BoundsCheck : MonoBehaviour
         Gizmos.DrawWireCube(Vector3.zero, boundSize);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
