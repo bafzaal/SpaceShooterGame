@@ -61,7 +61,7 @@ public class BoundsCheck : MonoBehaviour
             offDown = true;
         }
 
-       //isOnScreen = !(offRight || offLeft || offUp || offDown);
+       isOnScreen = !(offRight || offLeft || offUp || offDown);
 
         if (keepOnScreen && !isOnScreen)
         {
@@ -69,7 +69,6 @@ public class BoundsCheck : MonoBehaviour
             isOnScreen = true;
             offRight = offLeft = offUp = offDown = false;
         }
-
 
         transform.position = pos;
     }

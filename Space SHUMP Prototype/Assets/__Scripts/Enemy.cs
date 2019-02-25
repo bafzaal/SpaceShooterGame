@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Enemy : MonoBehaviour
 {
     [Header("Set in Inspector: Enemy")]
@@ -9,6 +11,13 @@ public class Enemy : MonoBehaviour
     public float fireRate = 0.3f;
     public float health = 10f;
     public int score = 100;
+    
+    private BoundsCheck bndCheck;
+
+    void Awake()
+    {
+        bndCheck = GetComponent<BoundsCheck>();
+    }
 
     public Vector3 pos{
         get
@@ -24,6 +33,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Move();
+
+        if (bndCheck!=null && bndCheck.offDown)
+        { //We have reached the bottom, so destroy this object
+            Destroy(gameObject);
+        }
+
     }
 
     public virtual void Move()
