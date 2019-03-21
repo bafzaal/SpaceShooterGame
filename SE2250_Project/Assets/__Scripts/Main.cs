@@ -6,19 +6,27 @@ using UnityEngine.SceneManagement;
 public class Main : MonoBehaviour
 {
     static public Main S;
-
+    static Dictionary<WeaponType, WeaponDefinition> WEAP_DICT; //has enum as key and class as the value
     [Header("Set in Inspector")]
     public GameObject[] prefabEnemies;
     public float enemySpawnPerSecond = 0.5f;
     public float enemyDefaultPadding = 1.5f;
+    public WeaponDefinition[] weaponDefinitions; //uses enum for properties
 
-    private BoundsCheck bndCheck;
+    private BoundsCheck _bndCheck;
 
     void Awake()
     {
         S = this;
-        bndCheck = GetComponent<BoundsCheck>();
+       _bndCheck = GetComponent<BoundsCheck>();
         Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
+
+        //A generic Dictonary with WeaponType as th ekey
+        WEAP_DICT = new Dictionary<WeaponType, WeaponDefinition>();
+        foreach (WeaponDefinition def in weaponDefinitions)
+        {
+            WEAP_DICT[def.type] = def;
+        }
     }
 
     public void SpawnEnemy()
@@ -31,10 +39,10 @@ public class Main : MonoBehaviour
             enemyPadding = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
 
         Vector3 pos = Vector3.zero;
-        float xMin = -bndCheck.camWidth + enemyPadding;
-        float xMax = bndCheck.camWidth - enemyPadding;
+        float xMin = -_bndCheck.camWidth + enemyPadding;
+        float xMax =_bndCheck.camWidth - enemyPadding;
         pos.x = Random.Range(xMin, xMax);
-        pos.y = bndCheck.camHeight + enemyPadding;
+        pos.y = _bndCheck.camHeight + enemyPadding;
         go.transform.position = pos;
 
         Invoke("SpawnEnemy", 1.5f / enemySpawnPerSecond);
@@ -50,6 +58,17 @@ public class Main : MonoBehaviour
     {
         //Reload _Scene_0 to restart the game
         SceneManager.LoadScene("_Scene_0");
+    }
+
+    static public WeaponDefinition GetWeaponDefinition(WeaponType weaponType)
+    {
+       //check to make sure key exists in dictionary
+        if (WEAP_DICT.ContainsKey(weaponType))
+        {
+            return (WEAP_DICT[weaponType]);
+        }
+        //failed to find the right weapon so it returns WeaponType.none
+        return (new WeaponDefinition());
     }
 
 }
