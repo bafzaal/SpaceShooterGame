@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4824462620037266}
   - component: {fileID: 135980859685483504}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SphereCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4465489399043216}
   - component: {fileID: 65558203093939468}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BoxCollider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4656281378598162}
   - component: {fileID: 65739373202878774}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BoxCollider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,9 +146,9 @@ GameObject:
   - component: {fileID: 8896353145428453749}
   - component: {fileID: 460227862485613796}
   - component: {fileID: 6907533929732164331}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy_1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
