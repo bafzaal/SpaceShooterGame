@@ -9,16 +9,15 @@ public class Hero : MonoBehaviour
 
     [Header("Set in Inspector")]
     // These fields control the movement of the ship
-    public float speed = 30;
-    public float rollMult = -45;
-    public float pitchMult = 30;
-    public float gameRestartDelay = 2f;
-    //public GameObject projectilePrefab;
-    public float projectileSpeed = 40;
+    public float speed = 30; // Speed is set to 30
+    public float rollMult = -45; // RollMult is set to -45
+    public float pitchMult = 30; // pitchMult is set to 30
+    public float gameRestartDelay = 2f; //The game restart delay is now 2
+    public float projectileSpeed = 40; // The speed of the pojectile is 40
 
     [Header("Set Dynamically")]
     [SerializeField]
-    private float _shieldLevel = 1;
+    private float _shieldLevel = 1; // Shield level is initialized to 1
     //holds a reference to the last triggering GameObject:
     private GameObject _lastTriggerGo = null;
 
@@ -29,15 +28,14 @@ public class Hero : MonoBehaviour
 
     void Awake()
     {
-        if (S == null)
+        if (S == null) // If the Singleton is null it is then set to this instance that was called
         {
             S = this;
         }
-        else
+        else // if S is not null
         {
-            Debug.LogError("Hero.Awake() - Attempted to assign second Hero.S!");
+            Debug.LogError("Hero.Awake() - Attempted to assign second Hero.S!"); // Message is sent to console
         }
-        //fireDelegate += TempFire;
     }
 
     // Update is called once per frame
@@ -49,18 +47,12 @@ public class Hero : MonoBehaviour
 
         //Change transform.position based on the axes
         Vector3 pos = transform.position;
-        pos.x += xAxis * speed * Time.deltaTime;
-        pos.y += yAxis * speed * Time.deltaTime;
+        pos.x += xAxis * speed * Time.deltaTime; // Alters the position in the x direction based on speed and time
+        pos.y += yAxis * speed * Time.deltaTime; // Alters the position in the y direction based on speed and time
         transform.position = pos;
 
         //Rotate the ship to make it feel more dynamic
         transform.rotation = Quaternion.Euler((yAxis * pitchMult) - 90f, xAxis * rollMult, 0);
-
-         /* //if space is pressed, call tempfire
-          if (Input.GetKeyDown(KeyCode.Space)) { 
-              TempFire();
-          }
-          */
 
        //using the fireDelegate to fire Weapons, button must be pressed and delegate isn't null
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null) //jump or space are inputs
@@ -68,27 +60,11 @@ public class Hero : MonoBehaviour
             fireDelegate(); //calls all functions added to fireDelegate
         }
     }
-    /*
-    void TempFire()
-    {
-        GameObject projGO = Instantiate<GameObject>(projectilePrefab); //create projectile
-        projGO.transform.position = transform.position; //set position
-        Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
-        //rigidB.velocity = Vector3.up * projectileSpeed; //control velocity
-
-        //pulls information from WeaponType of Projectile clases to set velocity
-        Projectile proj = projGO.GetComponent<Projectile>();
-        proj.type = WeaponType.blaster;
-        float tSpeed = Main.GetWeaponDefinition(proj.type).velocity;
-        rigidB.velocity = Vector3.up * tSpeed;
-    }
-    */
 
     void OnTriggerEnter(Collider other)
     {
         Transform rootT = other.gameObject.transform.root;
         GameObject go = rootT.gameObject;
-        //print("Triggered : " + go.name); 
 
         //Make sure it's not the same triggering go as last time 
         if (go == _lastTriggerGo) /*this can happen if the same enemy triggers 
@@ -106,7 +82,7 @@ public class Hero : MonoBehaviour
         }
         else
         {
-            print("Triggered by non-enemy: " + go.name);
+            print("Triggered by non-enemy: " + go.name); // Prints message to the console
         }
     }
 
@@ -114,7 +90,7 @@ public class Hero : MonoBehaviour
     {
         get
         {
-            return (_shieldLevel);
+            return (_shieldLevel); // Returns the shieldLevel
         }
         set
         {   //ensure that _shieldLevel is never higher than 4
@@ -126,7 +102,7 @@ public class Hero : MonoBehaviour
                 Destroy(this.gameObject);
 
              //Tell Main.S to restart the game after a delay
-                Main.S.DelayedRestart(gameRestartDelay);
+                Main.Singleton.DelayedRestart(gameRestartDelay);
             }
         }
     }

@@ -5,11 +5,12 @@ using UnityEngine;
 //This is an enum for various possible weapon types
     public enum WeaponType
 {
-    none, //default, mo weapon
+    none, //default, no weapon
     blaster, //A simple blaster
     spread, //Two simultaneous shots
     shield //Raise shieldLevel
 }
+
 
 /*WeaponDefinition class allows to set properties of specific weapon
 in the inspector. The main class will have an array of these*/
@@ -22,7 +23,7 @@ public class WeaponDefinition
     public GameObject projectilePrefab; //Prefab for projectiles
     public Color projectileColor = Color.white; 
     public float damageOnHit = 0; //Amount of damage caused
-    public float delayBetweenShots = 0;
+    public float delayBetweenShots = 0; // DelaryBetweenShots float variable is initialized to zero
     public float velocity = 20; //speed of projectiles
 }
 public class Weapon : MonoBehaviour
@@ -31,11 +32,13 @@ public class Weapon : MonoBehaviour
 
     [Header("Set Dynamically")]
     [SerializeField]
-    private WeaponType _weaponType = WeaponType.none;
+    private WeaponType _weaponType = WeaponType.none; // _WeaponType is initialized to the enum none
     public WeaponDefinition def;
-    public GameObject collar;
+    public GameObject collar; // Gameobject called collar
     public float lastShotTime; //time last shot was fired
     private Renderer _collarRend;
+
+    private int _currWeaponNumber = 0; // New private int _currWeaponNumber is initialized to zero, this varibale will help switch weapons.
 
     void Start()
     {
@@ -63,17 +66,17 @@ public class Weapon : MonoBehaviour
     {
         get
         {
-            return (_weaponType);
+            return (_weaponType); // Returns the current weaponType that is in use
         }
         set
         {
-            SetWeaponType(value);
+            SetWeaponType(value); // Sets the weapon type to the value
         }
     }
 
     public void SetWeaponType(WeaponType wepType)
     {
-        _weaponType = wepType;
+        _weaponType = wepType; // _weaponType is set to the passed parameter wepType
 
         if (type == WeaponType.none) //if weapontype is none, gameobject is disabled
         {
@@ -100,7 +103,7 @@ public class Weapon : MonoBehaviour
             return;
         }
 
-        Projectile weaponProjectile;
+        Projectile weaponProjectile; // New Projectile called weaponProjectile is declared
 
         Vector3 velocity = Vector3.up * def.velocity; //initial velocity is set to up
         if (transform.up.y < 0)
@@ -108,7 +111,7 @@ public class Weapon : MonoBehaviour
             velocity.y = -velocity.y; //y component set to down if weapons face down
         }
 
-        switch (type) //cases for the blaset and spread WeaponType
+        switch (type) //cases for the blast and spread WeaponType
         {
             case WeaponType.spread: //single projectile
                 weaponProjectile = MakeProjectile(); //calls function
@@ -138,12 +141,12 @@ public class Weapon : MonoBehaviour
         //proper tag is given depending on who fired the projectile:
         if (transform.parent.gameObject.tag == "Hero") 
         {
-            gObject.tag = "ProjectileHero";
+            gObject.tag = "ProjectileHero"; // gObject tag is set to "ProjectileHero"
             gObject.layer = LayerMask.NameToLayer("ProjectileHero");
         }
         else
         {
-            gObject.tag = "ProjectileEnemy";
+            gObject.tag = "ProjectileEnemy"; // gObject tag is set to "ProjectileEnemy"
             gObject.layer = LayerMask.NameToLayer("ProjectileEnemy");
         }
         gObject.transform.position = collar.transform.position;
@@ -156,5 +159,18 @@ public class Weapon : MonoBehaviour
         return (projectile); //return object reference of Projectile
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.C)) // If C is pressed then the following happens
+        {
+            _currWeaponNumber++; // Current weapon number is increased by 1
+            if (_currWeaponNumber > 1) // If it is greater than one it is reset since there is only 2 weapons right now (weapon 0 and weapon 1)
+                _currWeaponNumber = 0; // Resets the currWeaponNumber variable
+            if (_currWeaponNumber == 0) // If the currWeaponVariable is 0
+                SetWeaponType(WeaponType.blaster); // WeaponType is set to the blaster weapon
+            else if (_currWeaponNumber == 1) // If the currWeaponNumber is 1
+                SetWeaponType(WeaponType.spread); // WeaponType is set to the spread weapon
+        }
+    }
 
 }

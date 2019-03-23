@@ -160,8 +160,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   fireRate: 0.3
-  health: 10
+  health: 4
   score: 100
+  showDamageDuration: 0.1
+  originalColors: []
+  materials: []
+  showingDamage: 0
+  damageDoneTime: 0
+  notifiedofDestruction: 0
 --- !u!114 &4120194636443128765
 MonoBehaviour:
   m_ObjectHideFlags: 0

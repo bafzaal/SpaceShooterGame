@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     private Renderer _rend; 
 
     [Header("Set Dynamically")]
-    public Rigidbody rigidBody;
+    public Rigidbody rigidBody; // Declare new rigidbody which will be set dynamically
 
     [SerializeField] //allows it to be visible and settable in inspector
     private WeaponType _weaponType;
@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
     {
         get
         {
-            return (_weaponType);
+            return (_weaponType); // Returns the weapon type that is in use
         }
         set
         {
@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
     {
         if (bndCheck.offUp) //boundscheck
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Destroys the gameObject
         }
     }
 
