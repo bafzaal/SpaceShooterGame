@@ -14,9 +14,9 @@ public class Enemy_1 : Enemy
     public override void Move() // This Move function overrides the one that is in the Enemy class since it was a virtual function
     {
         Vector3 tempPos = pos; // Temporary function called tempPos is set to pos
-        tempPos.y -=  Mathf.Sin(45f) * (speed * Time.deltaTime); // tempPos.y is altered based on the speed and time
+        tempPos.y -= Mathf.Sin(45f) * (speed * Time.deltaTime); // tempPos.y is altered based on the speed and time
 
-        if(_randomDirection == 0) // If the _randomDirection is zero
+        if (_randomDirection == 0) // If the _randomDirection is zero
         {
             tempPos.x += Mathf.Cos(45f) * (speed * Time.deltaTime); // tempPos.x is altered based on the speed and time and the enemy moves to the right
         }
@@ -31,4 +31,6 @@ public class Enemy_1 : Enemy
 
         pos = tempPos; // pos is set to the tempPos vector that holds the new positions 
     }
-}
+
+ }
+

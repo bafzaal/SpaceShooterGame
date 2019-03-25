@@ -18,9 +18,8 @@ public class Enemy : MonoBehaviour
     public bool showingDamage = false; // Currently not showing damage
     public float damageDoneTime; // Time to stop showing damage
     public bool notifiedofDestruction = false; // Will be used later
-
+    public ScoreCounter scoreCounter;
     private BoundsCheck _bndCheck; // Private bounds check variable
-
     void Awake()
     {
         _bndCheck = GetComponent<BoundsCheck>();
@@ -31,6 +30,10 @@ public class Enemy : MonoBehaviour
         {
             originalColors[i] = materials[i].color; // Puts material colors into origionalColors array
         }
+    }
+    
+    void Start()
+    {
     }
 
     // This is a Property: A method that acts like a field
@@ -68,8 +71,24 @@ public class Enemy : MonoBehaviour
                 }
                 ShowDamage(); // Calls the ShowDamage() function
                 health -= Main.GetWeaponDefinition(weaponProjectile.type).damageOnHit; // Health is decreased in case of a collision with projectile
-                if (health <= 0) // If the health is below zero then the gameobject is destroyed
-                    Destroy(this.gameObject); // Destroy this game object
+                if (health <= 0)
+                {
+                    if (this.gameObject.name == "Enemy_0(Clone)")
+                    {
+                        ScoreCounter.CURR_SCORE += 100;
+                        Destroy(this.gameObject);
+                    }
+                    else if (this.gameObject.name == "Enemy_1(Clone)")
+                    {
+                        ScoreCounter.CURR_SCORE += 200;
+                        Destroy(this.gameObject);
+                    }
+                    else if (this.gameObject.name == "Enemy_2(Clone)")
+                    {
+                        ScoreCounter.CURR_SCORE+= 300;
+                        Destroy(this.gameObject);
+                    }
+                }// Destroy this game object
                 Destroy(otherGO); // Destroy the otherGO game object
                 break;
 

@@ -168,6 +168,7 @@ MonoBehaviour:
   showingDamage: 0
   damageDoneTime: 0
   notifiedofDestruction: 0
+  scoreCounter: {fileID: 0}
 --- !u!114 &4120194636443128765
 MonoBehaviour:
   m_ObjectHideFlags: 0

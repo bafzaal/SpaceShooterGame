@@ -52,6 +52,7 @@ public class Main : MonoBehaviour
     {
         //Invoke the Restart() method in delay seconds
         Invoke("Restart", delay);
+        ScoreCounter.CURR_SCORE = 0;
     }
 
     public void Restart() // The Restart function is used in this class

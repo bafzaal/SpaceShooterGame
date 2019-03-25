@@ -249,13 +249,14 @@ MonoBehaviour:
   speed: 10
   fireRate: 0.3
   health: 3
-  score: 100
+  score: 200
   showDamageDuration: 0.1
   originalColors: []
   materials: []
   showingDamage: 0
   damageDoneTime: 0
   notifiedofDestruction: 0
+  scoreCounter: {fileID: 0}
 --- !u!114 &6907533929732164331
 MonoBehaviour:
   m_ObjectHideFlags: 0
