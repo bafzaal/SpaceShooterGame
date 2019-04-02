@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
@@ -10,8 +11,14 @@ public class Main : MonoBehaviour
     [Header("Set in Inspector")]
     public GameObject[] prefabEnemies; // And array for all the enemies
     public float enemySpawnPerSecond = 0.5f; // 0.5 enemies spawn per second
+    public float levelStartDelay = 1.5f; // 2 seconds between level start
+    private Text levelText; // The text that is shown between levels
+    private GameObject levelImage; // The image for the background of the text
+    private bool doingSetUp; // bool to identify if setup is in progress or not
+    private int level = 1; // Current level indicator
     public float enemyDefaultPadding = 1.5f; // The enemy default badding is 1.5
     public WeaponDefinition[] weaponDefinitions; //uses enum for properties
+ 
 
     private BoundsCheck _bndCheck; // Private variable for bounds check is declared
 
@@ -27,6 +34,33 @@ public class Main : MonoBehaviour
         {
             WEAP_DICT[def.type] = def;
         }
+
+        InitGame();
+
+    }
+
+    void InitGame()
+    {
+        doingSetUp = true;
+        levelImage = GameObject.Find("LevelImage");
+        levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        levelText.text = "LEVEL: " + level;
+        levelImage.SetActive(true);
+        levelText.gameObject.SetActive(true);
+        Invoke("HideLevelImage", levelStartDelay);
+    }
+
+    //private void OnLevelWasLoaded(int index)
+    //{
+        //level++;
+        //InitGame();
+    //}
+
+    private void HideLevelImage()
+    {
+        levelImage.SetActive(false);
+        levelText.gameObject.SetActive(false);
+        doingSetUp = false;
     }
 
     public void SpawnEnemy() // SpawnEnemy function is public and returns void (returns nothing)
@@ -72,4 +106,9 @@ public class Main : MonoBehaviour
         return (new WeaponDefinition());
     }
 
+    private void Update()
+    {
+        if (doingSetUp)
+            return;
+    }
 }
