@@ -15,7 +15,8 @@ public class Main : MonoBehaviour
     private Text levelText; // The text that is shown between levels
     private GameObject levelImage; // The image for the background of the text
     private bool doingSetUp; // bool to identify if setup is in progress or not
-    private int level = 1; // Current level indicator
+    static public int LEVEL = 1; // Current level indicator
+    public bool isLevel2 = false;
     public float enemyDefaultPadding = 1.5f; // The enemy default badding is 1.5
     public WeaponDefinition[] weaponDefinitions; //uses enum for properties
  
@@ -42,9 +43,12 @@ public class Main : MonoBehaviour
     void InitGame()
     {
         doingSetUp = true;
-        levelImage = GameObject.Find("LevelImage");
-        levelText = GameObject.Find("LevelText").GetComponent<Text>();
-        levelText.text = "LEVEL: " + level;
+        if(LEVEL == 1)
+        {
+            levelImage = GameObject.Find("LevelImage");
+            levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        }
+        levelText.text = "LEVEL: " + LEVEL;
         levelImage.SetActive(true);
         levelText.gameObject.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
@@ -110,5 +114,10 @@ public class Main : MonoBehaviour
     {
         if (doingSetUp)
             return;
+        if(LEVEL == 2 && isLevel2 != true)
+        {
+            Awake();
+            isLevel2 = true;
+        }
     }
 }

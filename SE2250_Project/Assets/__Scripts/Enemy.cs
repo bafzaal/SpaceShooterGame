@@ -51,9 +51,12 @@ public class Enemy : MonoBehaviour
 
     public virtual void Move() // virtual function called Move
     {
-        Vector3 tempPos = pos; // Temporary Vector to hold the position
-        tempPos.y -= speed * Time.deltaTime; // temp position is set to a new value based on speed and time
-        pos = tempPos; // pos is set to the value of tempPos
+
+            Vector3 tempPos = pos; // Temporary Vector to hold the position
+            tempPos.y -= speed * Time.deltaTime; // temp position is set to a new value based on speed and time
+            pos = tempPos; // pos is set to the value of tempPos
+        
+
     }
 
     void OnCollisionEnter(Collision collision)
