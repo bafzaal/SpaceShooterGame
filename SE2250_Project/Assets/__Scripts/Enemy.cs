@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     public float health = 5; // health of the enemy
     public int score = 100; // Points earned for destroying this
     public float showDamageDuration = 0.1f; // Shows the damage for 0.5 seconds
+    public float powerUpDropChance = 1f; //chance to drop a powerup
+    public GameObject explosionPrefab;
 
     [Header("Set Dynamically: Enemy")]
     public Color[] originalColors; // new array of colors
@@ -20,12 +22,14 @@ public class Enemy : MonoBehaviour
     public bool notifiedofDestruction = false; // Will be used later
     public ScoreCounter scoreCounter;
     private BoundsCheck _bndCheck; // Private bounds check variable
-    void Awake()
+   
+     void Awake()
     {
         _bndCheck = GetComponent<BoundsCheck>();
         // Get materials and colors for this gameObject and its children
         materials = Utilities.GetAllMaterials(gameObject); // Calls the static function in Utilities class
         originalColors = new Color[materials.Length]; // originalColors array set to size of materials
+
         for(int i = 0; i < materials.Length; i++) // loop continues until it reaches size of materials
         {
             originalColors[i] = materials[i].color; // Puts material colors into origionalColors array
@@ -73,6 +77,13 @@ public class Enemy : MonoBehaviour
                 health -= Main.GetWeaponDefinition(weaponProjectile.type).damageOnHit; // Health is decreased in case of a collision with projectile
                 if (health <= 0)
                 {
+                    //tell the main singleton that this ship was destroyed
+                    if (!notifiedofDestruction)
+                    {
+                        Main.Singleton.ShipDestroyed(this);
+                    }
+                    notifiedofDestruction = true;
+
                     if (this.gameObject.name == "Enemy_0(Clone)")
                     {
                         ScoreCounter.CURR_SCORE += 100;
@@ -88,8 +99,12 @@ public class Enemy : MonoBehaviour
                         ScoreCounter.CURR_SCORE+= 300;
                         Destroy(this.gameObject);
                     }
+                    GameObject explosion = Instantiate(explosionPrefab, this.gameObject.transform.position, Quaternion.identity) as GameObject;
+                    Destroy(explosion, 2);
                 }// Destroy this game object
                 Destroy(otherGO); // Destroy the otherGO game object
+
+
                 break;
 
             default:

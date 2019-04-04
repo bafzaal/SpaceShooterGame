@@ -251,11 +251,14 @@ MonoBehaviour:
   health: 3
   score: 200
   showDamageDuration: 0.1
+  powerUpDropChance: 1
+  explosionPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
+    type: 3}
   originalColors: []
   materials: []
   showingDamage: 0
   damageDoneTime: 0
-  notifiedofDestruction: 0
+  notifiedofDestruction: 1
   scoreCounter: {fileID: 0}
 --- !u!114 &6907533929732164331
 MonoBehaviour:

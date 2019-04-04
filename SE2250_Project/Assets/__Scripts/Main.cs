@@ -12,8 +12,38 @@ public class Main : MonoBehaviour
     public float enemySpawnPerSecond = 0.5f; // 0.5 enemies spawn per second
     public float enemyDefaultPadding = 1.5f; // The enemy default badding is 1.5
     public WeaponDefinition[] weaponDefinitions; //uses enum for properties
+    public GameObject prefabPowerUp; //holds prefabs for powerups
+    //determines how often each powerup will be created:
+    public PowerUpType[] powerUpFrequency = new PowerUpType[] { PowerUpType.speed, PowerUpType.invincible };
+
+
 
     private BoundsCheck _bndCheck; // Private variable for bounds check is declared
+
+
+    public void ShipDestroyed(Enemy e) //called when enemy is destroyed
+    {//potentially generate a powerup
+
+        if (Random.value <= e.powerUpDropChance)//random value compared to see if powerup should be dropped
+        {
+            int ndx = Random.Range(0, powerUpFrequency.Length);//generates an index array number to randomly spawn powerup
+            PowerUpType puType = powerUpFrequency[ndx];
+
+            //spawn a powerup
+            GameObject go = Instantiate(prefabPowerUp) as GameObject;
+            PowerUp pu = go.GetComponent<PowerUp>();
+
+            //set it to the proper PowerUpType
+            pu.setType(puType); //setType handles color, text, and type of cube
+
+
+            //set it to the position of the destoryed ship
+            pu.transform.position = e.transform.position;
+
+        }
+
+
+    }
 
     void Awake()
     {
