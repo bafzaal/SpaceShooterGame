@@ -11,15 +11,19 @@ public class Enemy : MonoBehaviour
     public float health = 5; // health of the enemy
     public int score = 100; // Points earned for destroying this
     public float showDamageDuration = 0.1f; // Shows the damage for 0.5 seconds
+    public AudioClip explosionClip; //Audio that holds the exlposion
 
-    [Header("Set Dynamically: Enemy")]
+   [Header("Set Dynamically: Enemy")]
     public Color[] originalColors; // new array of colors
     public Material[] materials; // All the materials of this and its children
     public bool showingDamage = false; // Currently not showing damage
     public float damageDoneTime; // Time to stop showing damage
     public bool notifiedofDestruction = false; // Will be used later
-    public ScoreCounter scoreCounter;
+    private ScoreCounter scoreCounter;
     private BoundsCheck _bndCheck; // Private bounds check variable
+    protected float enemyOneTime = 0;
+    private bool turnedOneBlue = false;
+
     void Awake()
     {
         _bndCheck = GetComponent<BoundsCheck>();
@@ -54,6 +58,17 @@ public class Enemy : MonoBehaviour
         Vector3 tempPos = pos; // Temporary Vector to hold the position
         tempPos.y -= speed * Time.deltaTime; // temp position is set to a new value based on speed and time
         pos = tempPos; // pos is set to the value of tempPos
+        if(Input.GetKeyDown(KeyCode.B) && ScoreCounter.SLIDER_VAL == 1)
+        {
+
+            turnedOneBlue = true;
+            speed = 0;
+            foreach (Material m in materials) // For every m in "materials" the following happens
+            {
+                m.color = Color.blue; // The color is set to white to show the damage
+            }
+        }
+            
     }
 
     void OnCollisionEnter(Collision collision)
@@ -76,16 +91,18 @@ public class Enemy : MonoBehaviour
                     if (this.gameObject.name == "Enemy_0(Clone)")
                     {
                         ScoreCounter.CURR_SCORE += 100;
+                        AudioSource.PlayClipAtPoint(explosionClip, new Vector3(5, 1, 2)); // creates an audio source but automatically disposes of it once the clip has finished playing.
                         Destroy(this.gameObject);
                     }
                     else if (this.gameObject.name == "Enemy_1(Clone)")
                     {
-                        ScoreCounter.CURR_SCORE += 200;
+                        ScoreCounter.CURR_SCORE += 200;                        AudioSource.PlayClipAtPoint(explosionClip, new Vector3(5, 1, 2)); // creates an audio source but automatically disposes of it once the clip has finished playing
                         Destroy(this.gameObject);
                     }
                     else if (this.gameObject.name == "Enemy_2(Clone)")
                     {
                         ScoreCounter.CURR_SCORE+= 300;
+                        AudioSource.PlayClipAtPoint(explosionClip, new Vector3(5, 1, 2)); // creates an audio source but automatically disposes of it once the clip has finished playing
                         Destroy(this.gameObject);
                     }
                 }// Destroy this game object
@@ -125,11 +142,21 @@ public class Enemy : MonoBehaviour
         damageDoneTime = Time.time + showDamageDuration; // damageDoneTime is then changed
     }
 
-    void UnShowDamage()
+    public virtual void UnShowDamage()
     {
-        for(int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
+        if (turnedOneBlue)
         {
-            materials[i].color = originalColors[i]; // material color is set to the color that is in originalColors array
+            for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
+            {
+                materials[i].color = Color.blue; // material color is set to the color that is in originalColors array
+            }
+        }
+        else if(turnedOneBlue == false)
+        {
+            for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
+            {
+                materials[i].color = originalColors[i]; // material color is set to the color that is in originalColors array
+            }
         }
         showingDamage = false; // showing damage is set to false. 
     }

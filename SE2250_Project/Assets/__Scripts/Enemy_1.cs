@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy_1 : Enemy
 {
+    protected float enemyTwoTime = 0;
+    private bool turnedTwoBlue = false;
     private int _randomDirection; // Private integer called _randomDirection will help the enemy move in a random direction
 
     void Start()
@@ -30,7 +32,35 @@ public class Enemy_1 : Enemy
             _randomDirection = 0; // _randomDirection is set to 0 and then the enemy moves in the right direction 
 
         pos = tempPos; // pos is set to the tempPos vector that holds the new positions 
+        if (Input.GetKeyDown(KeyCode.B) && ScoreCounter.SLIDER_VAL == 1)
+        {
+            turnedTwoBlue = true;
+            speed = 0;
+            foreach (Material m in materials) // For every m in "materials" the following happens
+            {
+                m.color = Color.blue; // The color is set to white to show the damage
+            }
+
+        }
+    }
+    public override void UnShowDamage()
+    {
+        if (turnedTwoBlue)
+        {
+            for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
+            {
+                materials[i].color = Color.blue; // material color is set to the color that is in originalColors array
+            }
+        }
+        else if (turnedTwoBlue == false)
+        {
+            for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
+            {
+                materials[i].color = originalColors[i]; // material color is set to the color that is in originalColors array
+            }
+        }
+        showingDamage = false; // showing damage is set to false. 
     }
 
- }
+}
 
