@@ -22,7 +22,7 @@ public class Main : MonoBehaviour
 
 
     public void ShipDestroyed(Enemy e) //called when enemy is destroyed
-    {//potentially generate a powerup
+    {   //potentially generate a powerup
 
         if (Random.value <= e.powerUpDropChance)//random value compared to see if powerup should be dropped
         {
@@ -41,8 +41,6 @@ public class Main : MonoBehaviour
             pu.transform.position = e.transform.position;
 
         }
-
-
     }
 
     void Awake()

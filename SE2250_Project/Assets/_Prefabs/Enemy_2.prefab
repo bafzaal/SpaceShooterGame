@@ -296,7 +296,7 @@ MonoBehaviour:
   health: 2
   score: 300
   showDamageDuration: 0.1
-  powerUpDropChance: 1
+  powerUpDropChance: 0.4
   explosionPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
     type: 3}
   originalColors: []

@@ -93,7 +93,7 @@ public class Hero : MonoBehaviour
 
         _timer += Time.deltaTime;
 
-        if (_timer > 8.0f)
+        if (_timer > 12.0f)
         {
             _timer = 0f;
             speed = 30f;
@@ -127,29 +127,33 @@ public class Hero : MonoBehaviour
         Transform rootT = other.gameObject.transform.root;
         GameObject go = rootT.gameObject;
 
+        if (_invincible) { 
         //Make sure it's not the same triggering go as last time 
-        if (go == _lastTriggerGo && _invincible) /*this can happen if the same enemy triggers 
+        if (go == _lastTriggerGo) /*this can happen if the same enemy triggers 
                                     the hero in the same single frame*/
         {
             return;
         }
         _lastTriggerGo = go; //so that it updates the next time it is called
 
-            if (go.tag == "Enemy" && _invincible) //If the shield was triggered by an enemy
+        if (go.tag == "Enemy") //If the shield was triggered by an enemy
             {   
                 shieldLevel--; //Decrease the level of the shield by 1
-           GameObject explosion=Instantiate(explosionPrefab,other.gameObject.transform.position, Quaternion.identity) as GameObject;
-            Destroy(go); //..and destroy the enemy
-           Destroy(explosion,2);
-
-        }
-        else if (go.tag == "PowerUp")
-        {//if shield was triggered by PowerUp
-            AbsorbPowerUp(go);
+                GameObject explosion=Instantiate(explosionPrefab,other.gameObject.transform.position, Quaternion.identity) as GameObject;
+                explosion.transform.SetParent(Weapon.PROJECTILE_ANCHOR, true);
+                Destroy(go); //..and destroy the enemy
+                Destroy(explosion,2);
         }
         else
         {
+                if((go.tag != "PowerUp"))
             print("Triggered by non-enemy: " + go.name); // Prints message to the console
+        }
+            }
+
+        if (go.tag == "PowerUp")
+        {//if shield was triggered by PowerUp
+            AbsorbPowerUp(go);
         }
     }
  
@@ -163,7 +167,7 @@ public class Hero : MonoBehaviour
         switch (pu.type)
         {
             case PowerUpType.speed:
-                speed = 65f;
+                speed = 70f;
                 _timer = 0;
                 fast.gameObject.SetActive(true);
                 break;

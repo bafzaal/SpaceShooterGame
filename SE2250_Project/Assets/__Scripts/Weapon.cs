@@ -120,23 +120,23 @@ public class Weapon : MonoBehaviour
             case WeaponType.spread: //single projectile
                 weaponProjectile = MakeProjectile(); //calls function
                 weaponProjectile.rigidBody.velocity = velocity; //initialize velocity of projectile
-                StartCoroutine(Explosion(weaponProjectile, 0.08f));
+                StartCoroutine(Explosion(weaponProjectile, 0.05f));
                 break;
 
             case WeaponType.blaster: //3 types of proejctiles created if it is a spread
                 weaponProjectile = MakeProjectile(); //Make middle projectile
                 weaponProjectile.rigidBody.velocity = velocity; //initialize velocity
-                StartCoroutine(Explosion(weaponProjectile, 0.08f));
+                StartCoroutine(Explosion(weaponProjectile, 0.06f));
 
                 weaponProjectile = MakeProjectile(); //Make right projectile
                 weaponProjectile.transform.rotation = Quaternion.AngleAxis(30, Vector3.back);
                 weaponProjectile.rigidBody.velocity = weaponProjectile.transform.rotation * velocity;
-                StartCoroutine(Explosion(weaponProjectile, 0.08f));
+                StartCoroutine(Explosion(weaponProjectile, 0.06f));
 
                 weaponProjectile = MakeProjectile(); //Make left projectile
                 weaponProjectile.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 weaponProjectile.rigidBody.velocity = weaponProjectile.transform.rotation * velocity;
-                StartCoroutine(Explosion(weaponProjectile, 0.08f));
+                StartCoroutine(Explosion(weaponProjectile, 0.06f));
                 break;
         }
 
@@ -147,7 +147,10 @@ public class Weapon : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
 
+
         GameObject explosion = Instantiate(explosionPrefab, wP.transform.position, Quaternion.identity) as GameObject;
+        explosion.transform.SetParent(PROJECTILE_ANCHOR, true);
+
         Destroy(explosion,0.07f);
     }
 

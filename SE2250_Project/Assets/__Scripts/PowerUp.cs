@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 
 public enum PowerUpType
@@ -23,23 +23,20 @@ public class PowerUp : MonoBehaviour
     [Header("Set Dynamically")]
     public PowerUpType type; //The type of the PowerUp
     public GameObject cube; //Reference to the Cube child
-    public TextMesh letter; //Reference to the TextMesh
     public Vector3 rotPerSecond; //Euler rotation speed
     public float birthTime; 
 
     private Rigidbody _rigid; //private vars
     private BoundsCheck _bndCheck;
-    private Renderer _cubeRend;
+    public Material fast, star;
 
     void Awake()
     {
         //Find the Cube reference
         cube = transform.Find("Cube").gameObject;
-        //Find the TextMesh and other components
-        letter = GetComponent<TextMesh>();
         _rigid = GetComponent<Rigidbody>();
         _bndCheck = GetComponent<BoundsCheck>();
-        _cubeRend = GetComponent<Renderer>();
+      
 
         //Set a random velocity
         Vector3 vel = Random.onUnitSphere; //Get Random XYZ velocity
@@ -84,19 +81,6 @@ public class PowerUp : MonoBehaviour
             return;
         }
 
-        //Use u to determine the alpha value of the Cube & Letter
-        if (u > 0)
-        {
-            Color c = _cubeRend.material.color;
-            c.a = 1f - u;
-            _cubeRend.material.color = c;
-
-            //Fade the Letter too, just not as much
-            c = letter.color;
-            c.a = 1f - (u * 0.5f);
-            letter.color = c;
-        }
-
         if (!_bndCheck.isOnScreen)
         {
             //If the PowerUp has drifted entirely off the screen, destroy it
@@ -108,16 +92,13 @@ public class PowerUp : MonoBehaviour
     {
         if (puT ==PowerUpType.speed)
        {
-            _cubeRend.material.color = Color.red;
-            letter.text = "SPEED";
+            cube.GetComponent<Renderer>().material = fast;
             type = puT;
-
         }
 
         if (puT == PowerUpType.invincible)
         {
-            _cubeRend.material.color = Color.blue;
-            letter.text = "INVINCIBLE";
+            cube.GetComponent<Renderer>().material = star;
             type = puT;
         }
 

@@ -11,8 +11,8 @@ public class Enemy : MonoBehaviour
     public float health = 5; // health of the enemy
     public int score = 100; // Points earned for destroying this
     public float showDamageDuration = 0.1f; // Shows the damage for 0.5 seconds
-    public float powerUpDropChance = 1f; //chance to drop a powerup
-    public GameObject explosionPrefab;
+    public float powerUpDropChance = 0.4f; //chance to drop a powerup
+  
 
     [Header("Set Dynamically: Enemy")]
     public Color[] originalColors; // new array of colors
@@ -22,7 +22,8 @@ public class Enemy : MonoBehaviour
     public bool notifiedofDestruction = false; // Will be used later
     public ScoreCounter scoreCounter;
     private BoundsCheck _bndCheck; // Private bounds check variable
-   
+    public GameObject explosionPrefab;
+
      void Awake()
     {
         _bndCheck = GetComponent<BoundsCheck>();
@@ -100,6 +101,7 @@ public class Enemy : MonoBehaviour
                         Destroy(this.gameObject);
                     }
                     GameObject explosion = Instantiate(explosionPrefab, this.gameObject.transform.position, Quaternion.identity) as GameObject;
+                    explosion.transform.SetParent(Weapon.PROJECTILE_ANCHOR, true);
                     Destroy(explosion, 2);
                 }// Destroy this game object
                 Destroy(otherGO); // Destroy the otherGO game object
