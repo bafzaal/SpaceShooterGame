@@ -26,7 +26,7 @@ public class ScoreCounter : MonoBehaviour
         HIGH_SCORE = PlayerPrefs.GetInt("HighScore", 0); //  //Fetch the score from the PlayerPrefs (set these Playerprefs in another script). If no Int of this name exists, the default is 0.
         scoreText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 1.4f, 0)); //adjusts score when screen size is changed
         highScoreText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 1, 0)); //adjusts highscore when screen size is changed
-    }
+    }   
 
     void FixedUpdate()
     {

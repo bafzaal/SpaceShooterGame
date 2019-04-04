@@ -40,6 +40,8 @@ public class Weapon : MonoBehaviour
 
     private int _currWeaponNumber = 0; // New private int _currWeaponNumber is initialized to zero, this varibale will help switch weapons.
 
+    public GameObject explosionPrefab;
+
     void Start()
     {
         collar = transform.Find("Collar").gameObject;
@@ -57,7 +59,7 @@ public class Weapon : MonoBehaviour
         //Find the fireDelegate of the root GameObject
         GameObject rootGameObject = transform.root.gameObject;
         if (rootGameObject.GetComponent<Hero>() != null)
-        {//if a gameobject has a hero scropt, fire() is added to delegate
+        {//if a gameobject has a hero script, fire() is added to delegate
             rootGameObject.GetComponent<Hero>().fireDelegate += Fire;
         }
     }
@@ -111,28 +113,49 @@ public class Weapon : MonoBehaviour
             velocity.y = -velocity.y; //y component set to down if weapons face down
         }
 
+     
         switch (type) //cases for the blast and spread WeaponType
         {
+
             case WeaponType.spread: //single projectile
                 weaponProjectile = MakeProjectile(); //calls function
                 weaponProjectile.rigidBody.velocity = velocity; //initialize velocity of projectile
+                StartCoroutine(Explosion(weaponProjectile, 0.05f));
                 break;
 
             case WeaponType.blaster: //3 types of proejctiles created if it is a spread
                 weaponProjectile = MakeProjectile(); //Make middle projectile
                 weaponProjectile.rigidBody.velocity = velocity; //initialize velocity
+                StartCoroutine(Explosion(weaponProjectile, 0.06f));
+
                 weaponProjectile = MakeProjectile(); //Make right projectile
                 weaponProjectile.transform.rotation = Quaternion.AngleAxis(30, Vector3.back);
                 weaponProjectile.rigidBody.velocity = weaponProjectile.transform.rotation * velocity;
+                StartCoroutine(Explosion(weaponProjectile, 0.06f));
+
                 weaponProjectile = MakeProjectile(); //Make left projectile
                 weaponProjectile.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 weaponProjectile.rigidBody.velocity = weaponProjectile.transform.rotation * velocity;
+                StartCoroutine(Explosion(weaponProjectile, 0.06f));
                 break;
         }
+
+
+       
+    }
+    IEnumerator Explosion(Projectile wP, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+
+        GameObject explosion = Instantiate(explosionPrefab, wP.transform.position, Quaternion.identity) as GameObject;
+        explosion.transform.SetParent(PROJECTILE_ANCHOR, true);
+
+        Destroy(explosion,0.07f);
     }
 
     /*this method instantiates a clone of the prefab in WeaponDefinition
-     and returns a Projectile object reference*/  
+     and returns a Projectile object reference*/
     public Projectile MakeProjectile()
     {
 
