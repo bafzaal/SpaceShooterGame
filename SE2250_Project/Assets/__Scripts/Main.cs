@@ -102,7 +102,7 @@ public class Main : MonoBehaviour
     {
         //Reload _Scene_0 to restart the game
         LEVEL = 1;
-        SceneManager.LoadScene("_Scene_0");
+        SceneManager.LoadScene("Menu");
     }
 
     static public WeaponDefinition GetWeaponDefinition(WeaponType weaponType)
