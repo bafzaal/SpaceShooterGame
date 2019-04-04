@@ -91,6 +91,11 @@ public class Enemy : MonoBehaviour
                         ScoreCounter.CURR_SCORE+= 300;
                         Destroy(this.gameObject);
                     }
+                    else if (this.gameObject.name == "Enemy_3(Clone)")
+                    {
+                        ScoreCounter.CURR_SCORE += 500;
+                        Destroy(this.gameObject);
+                    }
                 }// Destroy this game object
                 Destroy(otherGO); // Destroy the otherGO game object
                 break;

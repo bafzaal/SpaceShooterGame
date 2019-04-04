@@ -682,8 +682,10 @@ MonoBehaviour:
   - {fileID: 1642630444709314, guid: 74b7965456014ac479ed89fe9fda4745, type: 3}
   - {fileID: 1774974519719246, guid: 7939b5832a07aa842b4736393efbcc35, type: 3}
   - {fileID: 1951038876638166, guid: 6a3276423bc22a240bc8c1525a815940, type: 3}
+  - {fileID: 191634, guid: 32303dc3554fcfc419798a1f0235187f, type: 3}
   enemySpawnPerSecond: 0.5
   levelStartDelay: 2
+  isLevel2: 0
   enemyDefaultPadding: 1.5
   weaponDefinitions:
   - type: 1
