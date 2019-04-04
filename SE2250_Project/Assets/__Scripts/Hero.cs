@@ -108,10 +108,6 @@ public class Hero : MonoBehaviour
             star.gameObject.SetActive(false);
         }
 
-        fast.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(5.9f, 1f, 0)); //adjusts score when screen size is changed
-        star.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(5f, 1f, 0)); //adjusts highscore when screen size is changed
-      
-
     }
 
     private void FixedUpdate()

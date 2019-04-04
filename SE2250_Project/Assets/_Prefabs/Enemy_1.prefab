@@ -253,12 +253,14 @@ MonoBehaviour:
   score: 200
   showDamageDuration: 0.1
   explosionClip: {fileID: 8300000, guid: 0decc0ea43d676f47ac80723f7a3c10d, type: 3}
+  powerUpDropChance: 0.4
   originalColors: []
   materials: []
   showingDamage: 0
   damageDoneTime: 0
-  notifiedofDestruction: 1
-  scoreCounter: {fileID: 0}
+  notifiedofDestruction: 0
+  explosionPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
+    type: 3}
 --- !u!114 &6907533929732164331
 MonoBehaviour:
   m_ObjectHideFlags: 0
