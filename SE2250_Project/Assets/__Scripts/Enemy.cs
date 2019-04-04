@@ -11,12 +11,11 @@ public class Enemy : MonoBehaviour
     public float health = 5; // health of the enemy
     public int score = 100; // Points earned for destroying this
     public float showDamageDuration = 0.1f; // Shows the damage for 0.5 seconds
-<<<<<<< HEAD
+
     public AudioClip explosionClip; //Audio that holds the exlposion
-=======
+
     public float powerUpDropChance = 0.4f; //chance to drop a powerup
   
->>>>>>> Powerups
 
    [Header("Set Dynamically: Enemy")]
     public Color[] originalColors; // new array of colors
@@ -26,16 +25,14 @@ public class Enemy : MonoBehaviour
     public bool notifiedofDestruction = false; // Will be used later
     private ScoreCounter scoreCounter;
     private BoundsCheck _bndCheck; // Private bounds check variable
-<<<<<<< HEAD
+
     protected float enemyOneTime = 0;
     private bool turnedOneBlue = false;
 
-    void Awake()
-=======
+
     public GameObject explosionPrefab;
 
      void Awake()
->>>>>>> Powerups
     {
         _bndCheck = GetComponent<BoundsCheck>();
         // Get materials and colors for this gameObject and its children

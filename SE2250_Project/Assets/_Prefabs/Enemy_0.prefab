@@ -1,4 +1,4 @@
-:diffg RE %YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &1259703737629944
 GameObject:
@@ -164,13 +164,7 @@ MonoBehaviour:
   health: 4
   score: 100
   showDamageDuration: 0.1
-<<<<<<< HEAD
   explosionClip: {fileID: 8300000, guid: 0decc0ea43d676f47ac80723f7a3c10d, type: 3}
-=======
-  powerUpDropChance: 0.4
-  explosionPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
-    type: 3}
->>>>>>> Powerups
   originalColors: []
   materials: []
   showingDamage: 0
@@ -300,7 +294,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  s:diffg RE erializedVersion: 6
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4242080058012462}
   - component: {fileID: 65708645949414860}
