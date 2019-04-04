@@ -9,5 +9,15 @@ public class MenuControl : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
+    public void IntructionsStart()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void CreditStart()
+    {
+        SceneManager.LoadScene(3);
+    }
         
 }
