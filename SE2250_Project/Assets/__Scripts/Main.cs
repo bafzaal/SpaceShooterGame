@@ -69,7 +69,12 @@ public class Main : MonoBehaviour
 
     public void SpawnEnemy() // SpawnEnemy function is public and returns void (returns nothing)
     {
-        int ndx = Random.Range(0, prefabEnemies.Length); // ndx variable holds a number from 0 to the amount of prefabEnemies
+        int ndx;
+        if(LEVEL == 1)
+            ndx = Random.Range(0, prefabEnemies.Length - 1); // ndx variable holds a number from 0 to the amount of prefabEnemies
+        else
+            ndx = Random.Range(0, prefabEnemies.Length);
+
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]); // Instantiates a enemy based on the random number
 
         float enemyPadding = enemyDefaultPadding; // enemyPadding is set to the Default enemy padding
@@ -96,6 +101,7 @@ public class Main : MonoBehaviour
     public void Restart() // The Restart function is used in this class
     {
         //Reload _Scene_0 to restart the game
+        LEVEL = 1;
         SceneManager.LoadScene("_Scene_0");
     }
 
