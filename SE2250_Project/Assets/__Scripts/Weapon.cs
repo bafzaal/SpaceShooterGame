@@ -147,11 +147,14 @@ public class Weapon : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
 
+        if (wP != null)
+        {
+            GameObject explosion = Instantiate(explosionPrefab, wP.transform.position, Quaternion.identity) as GameObject;
 
-        GameObject explosion = Instantiate(explosionPrefab, wP.transform.position, Quaternion.identity) as GameObject;
-        explosion.transform.SetParent(EFFECTS_ANCHOR, true);
-        if (explosion!=null)
-        Destroy(explosion,0.07f);
+                explosion.transform.SetParent(EFFECTS_ANCHOR, true);
+                Destroy(explosion, 0.07f);
+       
+        }
     }
 
     /*this method instantiates a clone of the prefab in WeaponDefinition

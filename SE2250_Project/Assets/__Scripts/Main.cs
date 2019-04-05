@@ -19,7 +19,6 @@ public class Main : MonoBehaviour
     public bool isLevel2 = false;
     public float enemyDefaultPadding = 1.5f; // The enemy default badding is 1.5
     public WeaponDefinition[] weaponDefinitions; //uses enum for properties
-
     public GameObject prefabPowerUp; //holds prefabs for powerups
     //determines how often each powerup will be created:
     public PowerUpType[] powerUpFrequency = new PowerUpType[] { PowerUpType.speed, PowerUpType.invincible };
@@ -70,6 +69,8 @@ public class Main : MonoBehaviour
 
     void InitGame()
     {
+       
+
         doingSetUp = true;
         if(LEVEL == 1)
         {

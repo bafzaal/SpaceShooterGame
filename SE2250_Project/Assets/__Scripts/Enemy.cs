@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public float showDamageDuration = 0.1f; // Shows the damage for 0.5 seconds
     public AudioClip explosionClip; //Audio that holds the exlposion
     public float powerUpDropChance = 0.4f; //chance to drop a powerup
-    public GameObject explosionPrefab;
+    public GameObject explosionPrefab, hitMarkerPrefab;
 
 
     [Header("Set Dynamically: Enemy")]
@@ -134,6 +134,15 @@ public class Enemy : MonoBehaviour
 
 
                 }// Destroy this game object
+
+
+                if (this.gameObject.name == "Enemy_3(Clone)")
+                {
+                    GameObject explosion = Instantiate(hitMarkerPrefab, this.gameObject.transform.position, Quaternion.identity) as GameObject;
+                    explosion.transform.SetParent(Weapon.EFFECTS_ANCHOR, true);
+                    Destroy(explosion, 2);
+                }
+
                 Destroy(otherGO); // Destroy the otherGO game object
 
 

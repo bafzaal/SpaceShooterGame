@@ -5,20 +5,30 @@ using UnityEngine;
 public class Enemy_3 : Enemy
 {
     private bool turnedThreeBlue = false;
-    private float holdX = 1;
+   
     public override void Move() // This Move function overrides the one in the Enemy class since it was virtual
     {
-
-        Vector3 tempPos = pos; // New vector called tempPos is set to pos
-        tempPos.y -= speed * Time.deltaTime; // tempPos.y is altered based on the speed and time
-        tempPos.x += Mathf.Sin(Time.time) * Time.deltaTime * 4 * holdX; // tempPos.x is altered based on the speed and time
-        pos = tempPos; // pos is set to the tempPos vector that holds the new positions
-       
-       if (Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value >= 100f)
+        if (GameObject.FindGameObjectWithTag("Hero") != null)
         {
-            holdX = 0;
+            if (this.gameObject.transform.position.y > GameObject.FindGameObjectWithTag("Hero").transform.position.y)
+            {
+
+                float step = speed * Time.deltaTime;
+                gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, GameObject.FindGameObjectWithTag("Hero").transform.position, step);
+            }
+            if (gameObject.transform.position.y < GameObject.FindGameObjectWithTag("Hero").transform.position.y)
+            {
+                Vector3 temp = pos;
+                temp.y -= speed * Time.deltaTime;
+                pos = temp;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value >= 100f)
+        {
+         
             turnedThreeBlue = true;
-            speed = 0;
+            speed = 4;
             foreach (Material m in materials) // For every m in "materials" the following happens
             {
                 m.color = Color.blue; // The color is set to white to show the damage
@@ -26,7 +36,7 @@ public class Enemy_3 : Enemy
 
         }
     }
-
+   
 
     public override void UnShowDamage()
     {

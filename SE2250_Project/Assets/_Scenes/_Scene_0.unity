@@ -1523,6 +1523,7 @@ MonoBehaviour:
   projectileSpeed: 40
   fast: {fileID: 0}
   star: {fileID: 0}
+  prize: {fileID: 8300000, guid: 186b83155cde34e158aead611ce9c34b, type: 3}
   explosionPrefab: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 3}
   _shieldLevel: 1

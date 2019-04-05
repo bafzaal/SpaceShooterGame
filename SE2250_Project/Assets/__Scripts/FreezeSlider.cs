@@ -23,10 +23,10 @@ public class FreezeSlider : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
-        slide.value += 0.1f;
+        slide.value += 0.04f;
 
 
         if (slide.value >= 100f)

@@ -106,7 +106,6 @@ GameObject:
   - component: {fileID: 210649330011798862}
   - component: {fileID: 5193669686783920135}
   - component: {fileID: 5475231599689878188}
-  - component: {fileID: 3104342791654355764}
   m_Layer: 9
   m_Name: Enemy_3
   m_TagString: Enemy
@@ -187,6 +186,8 @@ MonoBehaviour:
   powerUpDropChance: 0.4
   explosionPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
     type: 3}
+  hitMarkerPrefab: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,
+    type: 3}
   originalColors: []
   materials: []
   showingDamage: 0
@@ -236,18 +237,4 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191634}
-  m_Mesh: {fileID: 4300000, guid: 3fbde013fc1ae0a45a2afb111678bdee, type: 3}
---- !u!64 &3104342791654355764
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191634}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 3fbde013fc1ae0a45a2afb111678bdee, type: 3}

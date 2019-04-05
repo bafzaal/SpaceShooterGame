@@ -22,7 +22,7 @@ public class Hero : MonoBehaviour
     private Color[] _colors = new Color[]{ Color.yellow, Color.black };
     private int index = 0;
     public RawImage fast, star;
-    
+    public AudioClip prize;
     public GameObject explosionPrefab;
 
     [Header("Set Dynamically")]
@@ -152,6 +152,8 @@ public class Hero : MonoBehaviour
         if (go.tag == "PowerUp")
         {//if shield was triggered by PowerUp
             AbsorbPowerUp(go);
+            AudioSource.PlayClipAtPoint(prize, new Vector3(5, 1, 2));
+
         }
     }
  
