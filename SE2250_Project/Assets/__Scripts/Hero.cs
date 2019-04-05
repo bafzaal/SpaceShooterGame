@@ -138,7 +138,7 @@ public class Hero : MonoBehaviour
             {   
                 shieldLevel--; //Decrease the level of the shield by 1
                 GameObject explosion=Instantiate(explosionPrefab,other.gameObject.transform.position, Quaternion.identity) as GameObject;
-                explosion.transform.SetParent(Weapon.PROJECTILE_ANCHOR, true);
+                explosion.transform.SetParent(Weapon.EFFECTS_ANCHOR, true);
                 Destroy(go); //..and destroy the enemy
                 Destroy(explosion,2);
         }

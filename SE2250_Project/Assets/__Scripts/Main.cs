@@ -82,12 +82,7 @@ public class Main : MonoBehaviour
         Invoke("HideLevelImage", levelStartDelay);
     }
 
-    //private void OnLevelWasLoaded(int index)
-    //{
-        //level++;
-        //InitGame();
-    //}
-
+   
     private void HideLevelImage()
     {
         levelImage.SetActive(false);

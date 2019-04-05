@@ -28,7 +28,7 @@ public class WeaponDefinition
 }
 public class Weapon : MonoBehaviour
 {
-    static public Transform PROJECTILE_ANCHOR;
+    static public Transform EFFECTS_ANCHOR;
 
     [Header("Set Dynamically")]
     [SerializeField]
@@ -51,10 +51,10 @@ public class Weapon : MonoBehaviour
         SetWeaponType(_weaponType);
 
         //Dynamically create an anchor for all Projectiles
-        if (PROJECTILE_ANCHOR == null) //static Transform to act as parent of projectiles
+        if (EFFECTS_ANCHOR == null) //static Transform to act as parent of projectiles
         {
-            GameObject gameobject = new GameObject("_ProjectileAnchor");
-            PROJECTILE_ANCHOR = gameobject.transform;
+            GameObject gameobject = new GameObject("_EffectsAnchor");
+            EFFECTS_ANCHOR = gameobject.transform;
         }
         //Find the fireDelegate of the root GameObject
         GameObject rootGameObject = transform.root.gameObject;
@@ -149,7 +149,7 @@ public class Weapon : MonoBehaviour
 
 
         GameObject explosion = Instantiate(explosionPrefab, wP.transform.position, Quaternion.identity) as GameObject;
-        explosion.transform.SetParent(PROJECTILE_ANCHOR, true);
+        explosion.transform.SetParent(EFFECTS_ANCHOR, true);
         if (explosion!=null)
         Destroy(explosion,0.07f);
     }
@@ -174,7 +174,7 @@ public class Weapon : MonoBehaviour
         }
         gObject.transform.position = collar.transform.position;
         //places it under the _ProjectileAnchor in hierarchy pane to keep it clean:
-        gObject.transform.SetParent(PROJECTILE_ANCHOR, true);
+        gObject.transform.SetParent(EFFECTS_ANCHOR, true);
         Projectile projectile = gObject.GetComponent<Projectile>();
         projectile.type = type;
         //lastShotTime is set to current time it follows the delayBetweenShots:

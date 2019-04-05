@@ -11,14 +11,12 @@ public class Enemy : MonoBehaviour
     public float health = 5; // health of the enemy
     public int score = 100; // Points earned for destroying this
     public float showDamageDuration = 0.1f; // Shows the damage for 0.5 seconds
-
     public AudioClip explosionClip; //Audio that holds the exlposion
-
     public float powerUpDropChance = 0.4f; //chance to drop a powerup
-  
+    public GameObject explosionPrefab;
 
 
-   [Header("Set Dynamically: Enemy")]
+    [Header("Set Dynamically: Enemy")]
     public Color[] originalColors; // new array of colors
     public Material[] materials; // All the materials of this and its children
     public bool showingDamage = false; // Currently not showing damage
@@ -29,10 +27,7 @@ public class Enemy : MonoBehaviour
 
     protected float enemyOneTime = 0;
     private bool turnedOneBlue = false;
-
-   
-
-    public GameObject explosionPrefab;
+  
 
      void Awake()
 
@@ -116,7 +111,8 @@ public class Enemy : MonoBehaviour
                     }
                     else if (this.gameObject.name == "Enemy_1(Clone)")
                     {
-                        ScoreCounter.CURR_SCORE += 200;                        AudioSource.PlayClipAtPoint(explosionClip, new Vector3(5, 1, 2)); // creates an audio source but automatically disposes of it once the clip has finished playing
+                        ScoreCounter.CURR_SCORE += 200;                        
+                        AudioSource.PlayClipAtPoint(explosionClip, new Vector3(5, 1, 2)); // creates an audio source but automatically disposes of it once the clip has finished playing
                         Destroy(this.gameObject);
                     }
                     else if (this.gameObject.name == "Enemy_2(Clone)")
@@ -133,7 +129,7 @@ public class Enemy : MonoBehaviour
                         Destroy(this.gameObject);
                     }
                     GameObject explosion = Instantiate(explosionPrefab, this.gameObject.transform.position, Quaternion.identity) as GameObject;
-                    explosion.transform.SetParent(Weapon.PROJECTILE_ANCHOR, true);
+                    explosion.transform.SetParent(Weapon.EFFECTS_ANCHOR, true);
                     Destroy(explosion, 2);
 
 
