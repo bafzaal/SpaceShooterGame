@@ -37,7 +37,11 @@ QualitySettings:
     streamingMipmapsMaxFileIORequests: 1024
     particleRaycastBudget: 4
     asyncUploadTimeSlice: 2
+<<<<<<< HEAD
     asyncUploadBufferSize: 4
+=======
+    asyncUploadBufferSize: 16
+>>>>>>> origin/newLevelBranch
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
@@ -72,7 +76,11 @@ QualitySettings:
     streamingMipmapsMaxFileIORequests: 1024
     particleRaycastBudget: 16
     asyncUploadTimeSlice: 2
+<<<<<<< HEAD
     asyncUploadBufferSize: 4
+=======
+    asyncUploadBufferSize: 16
+>>>>>>> origin/newLevelBranch
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
@@ -107,7 +115,11 @@ QualitySettings:
     streamingMipmapsMaxFileIORequests: 1024
     particleRaycastBudget: 64
     asyncUploadTimeSlice: 2
+<<<<<<< HEAD
     asyncUploadBufferSize: 4
+=======
+    asyncUploadBufferSize: 16
+>>>>>>> origin/newLevelBranch
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
@@ -142,7 +154,11 @@ QualitySettings:
     streamingMipmapsMaxFileIORequests: 1024
     particleRaycastBudget: 256
     asyncUploadTimeSlice: 2
+<<<<<<< HEAD
     asyncUploadBufferSize: 4
+=======
+    asyncUploadBufferSize: 16
+>>>>>>> origin/newLevelBranch
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
@@ -177,7 +193,11 @@ QualitySettings:
     streamingMipmapsMaxFileIORequests: 1024
     particleRaycastBudget: 1024
     asyncUploadTimeSlice: 2
+<<<<<<< HEAD
     asyncUploadBufferSize: 4
+=======
+    asyncUploadBufferSize: 16
+>>>>>>> origin/newLevelBranch
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
@@ -212,7 +232,11 @@ QualitySettings:
     streamingMipmapsMaxFileIORequests: 1024
     particleRaycastBudget: 4096
     asyncUploadTimeSlice: 2
+<<<<<<< HEAD
     asyncUploadBufferSize: 4
+=======
+    asyncUploadBufferSize: 16
+>>>>>>> origin/newLevelBranch
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []

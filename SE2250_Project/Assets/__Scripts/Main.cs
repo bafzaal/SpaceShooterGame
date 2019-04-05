@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
@@ -10,13 +11,23 @@ public class Main : MonoBehaviour
     [Header("Set in Inspector")]
     public GameObject[] prefabEnemies; // And array for all the enemies
     public float enemySpawnPerSecond = 0.5f; // 0.5 enemies spawn per second
+    public float levelStartDelay = 1.5f; // 2 seconds between level start
+    private Text levelText; // The text that is shown between levels
+    private GameObject levelImage; // The image for the background of the text
+    private bool doingSetUp; // bool to identify if setup is in progress or not
+    static public int LEVEL = 1; // Current level indicator
+    public bool isLevel2 = false;
     public float enemyDefaultPadding = 1.5f; // The enemy default badding is 1.5
     public WeaponDefinition[] weaponDefinitions; //uses enum for properties
+<<<<<<< HEAD
     public GameObject prefabPowerUp; //holds prefabs for powerups
     //determines how often each powerup will be created:
     public PowerUpType[] powerUpFrequency = new PowerUpType[] { PowerUpType.speed, PowerUpType.invincible };
 
 
+=======
+ 
+>>>>>>> origin/newLevelBranch
 
     private BoundsCheck _bndCheck; // Private variable for bounds check is declared
 
@@ -55,11 +66,46 @@ public class Main : MonoBehaviour
         {
             WEAP_DICT[def.type] = def;
         }
+
+        InitGame();
+
+    }
+
+    void InitGame()
+    {
+        doingSetUp = true;
+        if(LEVEL == 1)
+        {
+            levelImage = GameObject.Find("LevelImage");
+            levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        }
+        levelText.text = "LEVEL: " + LEVEL;
+        levelImage.SetActive(true);
+        levelText.gameObject.SetActive(true);
+        Invoke("HideLevelImage", levelStartDelay);
+    }
+
+    //private void OnLevelWasLoaded(int index)
+    //{
+        //level++;
+        //InitGame();
+    //}
+
+    private void HideLevelImage()
+    {
+        levelImage.SetActive(false);
+        levelText.gameObject.SetActive(false);
+        doingSetUp = false;
     }
 
     public void SpawnEnemy() // SpawnEnemy function is public and returns void (returns nothing)
     {
-        int ndx = Random.Range(0, prefabEnemies.Length); // ndx variable holds a number from 0 to the amount of prefabEnemies
+        int ndx;
+        if(LEVEL == 1)
+            ndx = Random.Range(0, prefabEnemies.Length - 1); // ndx variable holds a number from 0 to the amount of prefabEnemies
+        else
+            ndx = Random.Range(0, prefabEnemies.Length);
+
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]); // Instantiates a enemy based on the random number
 
         float enemyPadding = enemyDefaultPadding; // enemyPadding is set to the Default enemy padding
@@ -86,7 +132,8 @@ public class Main : MonoBehaviour
     public void Restart() // The Restart function is used in this class
     {
         //Reload _Scene_0 to restart the game
-        SceneManager.LoadScene("_Scene_0");
+        LEVEL = 1;
+        SceneManager.LoadScene("Menu");
     }
 
     static public WeaponDefinition GetWeaponDefinition(WeaponType weaponType)
@@ -100,4 +147,14 @@ public class Main : MonoBehaviour
         return (new WeaponDefinition());
     }
 
+    private void Update()
+    {
+        if (doingSetUp)
+            return;
+        if(LEVEL == 2 && isLevel2 != true)
+        {
+            Awake();
+            isLevel2 = true;
+        }
+    }
 }

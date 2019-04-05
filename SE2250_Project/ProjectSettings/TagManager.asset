@@ -12,6 +12,7 @@ TagManager:
   - PowerUpBox
   - EnemyOne
   - EnemyTwo
+  - EnemyThree
   layers:
   - Default
   - TransparentFX

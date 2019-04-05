@@ -11,11 +11,12 @@ public class Enemy : MonoBehaviour
     public float health = 5; // health of the enemy
     public int score = 100; // Points earned for destroying this
     public float showDamageDuration = 0.1f; // Shows the damage for 0.5 seconds
-
+<<<<<<< HEAD
     public AudioClip explosionClip; //Audio that holds the exlposion
-
+=======
     public float powerUpDropChance = 0.4f; //chance to drop a powerup
   
+>>>>>>> Powerups
 
    [Header("Set Dynamically: Enemy")]
     public Color[] originalColors; // new array of colors
@@ -25,14 +26,16 @@ public class Enemy : MonoBehaviour
     public bool notifiedofDestruction = false; // Will be used later
     private ScoreCounter scoreCounter;
     private BoundsCheck _bndCheck; // Private bounds check variable
-
+<<<<<<< HEAD
     protected float enemyOneTime = 0;
     private bool turnedOneBlue = false;
 
-
+    void Awake()
+=======
     public GameObject explosionPrefab;
 
      void Awake()
+>>>>>>> Powerups
     {
         _bndCheck = GetComponent<BoundsCheck>();
         // Get materials and colors for this gameObject and its children
@@ -67,7 +70,7 @@ public class Enemy : MonoBehaviour
         Vector3 tempPos = pos; // Temporary Vector to hold the position
         tempPos.y -= speed * Time.deltaTime; // temp position is set to a new value based on speed and time
         pos = tempPos; // pos is set to the value of tempPos
-        if(Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value >= 100f)
+        if(Input.GetKeyDown(KeyCode.B) && ScoreCounter.SLIDER_VAL == 1)
         {
 
             turnedOneBlue = true;
@@ -85,6 +88,12 @@ public class Enemy : MonoBehaviour
         GameObject otherGO = collision.gameObject; // Creates a new GameObject called otherGO and is set to the collision gameObject
         switch(otherGO.tag)
         {
+            case "ProjectileHero": // In the case that the tag is ProjectileHero
+                Projectile weaponProjectile = otherGO.GetComponent<Projectile>(); // new Projectile called weapon projectile is initialized as the projectile 
+                                                                                  // of the otherGO gameobject
+                if (!_bndCheck.isOnScreen) // If not on screen the gameobject is destroyed
+                {
+                    Destroy(otherGO); // Destroy the gameobject
             case "ProjectileHero": // In the case that the tag is ProjectileHero
                 Projectile weaponProjectile = otherGO.GetComponent<Projectile>(); // new Projectile called weapon projectile is initialized as the projectile 
                                                                                   // of the otherGO gameobject
@@ -121,9 +130,17 @@ public class Enemy : MonoBehaviour
                         AudioSource.PlayClipAtPoint(explosionClip, new Vector3(5, 1, 2)); // creates an audio source but automatically disposes of it once the clip has finished playing
                         Destroy(this.gameObject);
                     }
+<<<<<<< HEAD
                     GameObject explosion = Instantiate(explosionPrefab, this.gameObject.transform.position, Quaternion.identity) as GameObject;
                     explosion.transform.SetParent(Weapon.PROJECTILE_ANCHOR, true);
                     Destroy(explosion, 2);
+=======
+                    else if (this.gameObject.name == "Enemy_3(Clone)")
+                    {
+                        ScoreCounter.CURR_SCORE += 500;
+                        Destroy(this.gameObject);
+                    }
+>>>>>>> origin/newLevelBranch
                 }// Destroy this game object
                 Destroy(otherGO); // Destroy the otherGO game object
 
@@ -160,20 +177,6 @@ public class Enemy : MonoBehaviour
             m.color = Color.white; // The color is set to white to show the damage
         }
         showingDamage = true; // showing damage is set to true since damage is being shown
-        damageDoneTime = Time.time + showDamageDuration; // damageDoneTime is then changed
-    }
-
-    public virtual void UnShowDamage()
-    {
-        if (turnedOneBlue)
-        {
-            for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
-            {
-                materials[i].color = Color.blue; // material color is set to the color that is in originalColors array
-            }
-        }
-        else if(turnedOneBlue == false)
-        {
             for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
             {
                 materials[i].color = originalColors[i]; // material color is set to the color that is in originalColors array
