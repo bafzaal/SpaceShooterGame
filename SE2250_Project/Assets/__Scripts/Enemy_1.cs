@@ -32,7 +32,7 @@ public class Enemy_1 : Enemy
             _randomDirection = 0; // _randomDirection is set to 0 and then the enemy moves in the right direction 
 
         pos = tempPos; // pos is set to the tempPos vector that holds the new positions 
-        if (Input.GetKeyDown(KeyCode.B) && ScoreCounter.SLIDER_VAL == 1)
+        if (Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value >= 100f)
         {
             turnedTwoBlue = true;
             speed = 0;

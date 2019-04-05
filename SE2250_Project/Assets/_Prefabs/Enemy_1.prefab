@@ -253,7 +253,7 @@ MonoBehaviour:
   score: 200
   showDamageDuration: 0.1
   explosionClip: {fileID: 8300000, guid: 0decc0ea43d676f47ac80723f7a3c10d, type: 3}
-  powerUpDropChance: 0.4
+  powerUpDropChance: 0.25
   originalColors: []
   materials: []
   showingDamage: 0

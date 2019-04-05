@@ -13,7 +13,7 @@ public class Enemy_2 : Enemy
         tempPos.y -= speed * Time.deltaTime; // tempPos.y is altered based on the speed and time
         tempPos.x += Mathf.Sin(Time.time) * Time.deltaTime * 4 * holdX; // tempPos.x is altered based on the speed and time
         pos = tempPos; // pos is set to the tempPos vector that holds the new positions
-        if (Input.GetKeyDown(KeyCode.B) && ScoreCounter.SLIDER_VAL == 1)
+        if (Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value >= 100f)
         {
             speed = 0;
             holdX = 0;

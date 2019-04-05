@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
         Vector3 tempPos = pos; // Temporary Vector to hold the position
         tempPos.y -= speed * Time.deltaTime; // temp position is set to a new value based on speed and time
         pos = tempPos; // pos is set to the value of tempPos
-        if(Input.GetKeyDown(KeyCode.B) && ScoreCounter.SLIDER_VAL == 1)
+        if(Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value >= 100f)
         {
 
             turnedOneBlue = true;

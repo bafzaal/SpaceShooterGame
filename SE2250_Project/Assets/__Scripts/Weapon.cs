@@ -150,7 +150,7 @@ public class Weapon : MonoBehaviour
 
         GameObject explosion = Instantiate(explosionPrefab, wP.transform.position, Quaternion.identity) as GameObject;
         explosion.transform.SetParent(PROJECTILE_ANCHOR, true);
-
+        if (explosion!=null)
         Destroy(explosion,0.07f);
     }
 

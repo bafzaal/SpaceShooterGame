@@ -49,9 +49,10 @@ public class Hero : MonoBehaviour
 
         _mat = GetComponent<Renderer>().material;
 
-      
+       
 
     }
+   
     private void Start()
     {
         GameObject gObject = GameObject.Find("Star");
@@ -69,6 +70,7 @@ public class Hero : MonoBehaviour
             fast.gameObject.SetActive(false);
         }
     }
+
     // Update is called once per frame
     void Update()
     {
