@@ -14,7 +14,7 @@ public class Enemy_2 : Enemy
         tempPos.y -= speed * Time.deltaTime; // tempPos.y is altered based on the speed and time
         tempPos.x += Mathf.Sin(Time.time) * Time.deltaTime * 4 * holdX; // tempPos.x is altered based on the speed and time
         pos = tempPos; // pos is set to the tempPos vector that holds the new positions
-<<<<<<< HEAD
+
         if (Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value >= 100f)
         {
             speed = 0;
@@ -42,8 +42,6 @@ public class Enemy_2 : Enemy
             }
         }
         showingDamage = false; // showing damage is set to false. 
-=======
-        
->>>>>>> origin/newLevelBranch
+
     }
 }
