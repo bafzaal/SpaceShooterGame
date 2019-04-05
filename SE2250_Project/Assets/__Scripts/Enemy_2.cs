@@ -19,6 +19,7 @@ public class Enemy_2 : Enemy
         {
             speed = 0;
            _holdX = 0;
+           _turnedThreeBlue = true;
             foreach (Material m in materials) // For every m in "materials" the following happens
             {
                 m.color = Color.blue; // The color is set to white to show the damage
