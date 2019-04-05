@@ -23,7 +23,7 @@ public class Hero : MonoBehaviour
     private int _index = 0;
     public RawImage fast, star;
     public AudioClip prize;
-    public GameObject explosionPrefab;
+    public GameObject explosionPrefab,exhaustPrefab,flame1,flame2;
 
     [Header("Set Dynamically")]
     [SerializeField]
@@ -69,6 +69,9 @@ public class Hero : MonoBehaviour
             fast = gObject.GetComponent<RawImage>();
             fast.gameObject.SetActive(false);
         }
+     flame1= GameObject.Find("Flame1");
+     flame2 = GameObject.Find("Flame2");
+
     }
 
     // Update is called once per frame
@@ -83,6 +86,15 @@ public class Hero : MonoBehaviour
         pos.x += xAxis * speed * Time.deltaTime; // Alters the position in the x direction based on speed and time
         pos.y += yAxis * speed * Time.deltaTime; // Alters the position in the y direction based on speed and time
         transform.position = pos;
+
+        GameObject exhaust1 = Instantiate(exhaustPrefab,flame1.transform.position, Quaternion.identity) as GameObject;
+        exhaust1.transform.SetParent(Weapon.EFFECTS_ANCHOR, true);
+
+        GameObject exhaust2 = Instantiate(exhaustPrefab, flame2.transform.position, Quaternion.identity) as GameObject;
+        exhaust2.transform.SetParent(Weapon.EFFECTS_ANCHOR, true);
+
+        Destroy(exhaust1, 0.1f);
+        Destroy(exhaust2, 0.1f);
 
         //Rotate the ship to make it feel more dynamic
         transform.rotation = Quaternion.Euler((yAxis * pitchMult) - 90f, xAxis * rollMult, 0);
