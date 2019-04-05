@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class FreezeSlider : MonoBehaviour
 {
-    private float bWasPressedTime = 0;
-    private bool bWasPressed = false;
-    private bool playAudio = true;
+    private float _bWasPressedTime = 0;
+    private bool _bWasPressed = false;
+    private bool _playAudio = true;
     public Image Fill;
     public AudioClip freezingClip;
     public AudioClip freezeReady;
@@ -33,10 +33,10 @@ public class FreezeSlider : MonoBehaviour
         {
             Fill.color = Color.blue;
 
-            if (playAudio)
+            if (_playAudio)
             {
                 AudioSource.PlayClipAtPoint(freezeReady, new Vector3(5, 1, 2));
-                playAudio = false;
+                _playAudio = false;
             }
 
         }
@@ -44,17 +44,17 @@ public class FreezeSlider : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B) && slide.value >= 100f)
         {
             AudioSource.PlayClipAtPoint(freezingClip, new Vector3(5, 1, 2));
-            bWasPressed = true;
+            _bWasPressed = true;
         }
 
-        if (bWasPressed)
+        if (_bWasPressed)
         {
-            bWasPressedTime += Time.deltaTime;
-            if (bWasPressedTime > 0.1f)
+            _bWasPressedTime += Time.deltaTime;
+            if (_bWasPressedTime > 0.1f)
             {
-                bWasPressedTime = 0f;
-                bWasPressed = false;
-                playAudio = true;
+                _bWasPressedTime = 0f;
+                _bWasPressed = false;
+                _playAudio = true;
                 slide.value = 0f;
             }
 

@@ -21,8 +21,7 @@ public class Enemy : MonoBehaviour
     public Material[] materials; // All the materials of this and its children
     public bool showingDamage = false; // Currently not showing damage
     public float damageDoneTime; // Time to stop showing damage
-    public bool notifiedofDestruction = false; // Will be used later
-    private ScoreCounter scoreCounter;
+    public bool notifiedOfDestruction = false; // Will be used later
     private BoundsCheck _bndCheck; // Private bounds check variable
 
     protected float enemyOneTime = 0;
@@ -97,11 +96,11 @@ public class Enemy : MonoBehaviour
                 if (health <= 0)
                 {
                     //tell the main singleton that this ship was destroyed
-                    if (!notifiedofDestruction)
+                    if (!notifiedOfDestruction)
                     {
                         Main.Singleton.ShipDestroyed(this);
                     }
-                    notifiedofDestruction = true;
+                    notifiedOfDestruction = true;
 
                     if (this.gameObject.name == "Enemy_0(Clone)")
                     {

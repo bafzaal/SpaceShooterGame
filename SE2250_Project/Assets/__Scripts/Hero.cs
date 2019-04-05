@@ -20,7 +20,7 @@ public class Hero : MonoBehaviour
     private bool _invincible = true;
     private Material _mat;
     private Color[] _colors = new Color[]{ Color.yellow, Color.black };
-    private int index = 0;
+    private int _index = 0;
     public RawImage fast, star;
     public AudioClip prize;
     public GameObject explosionPrefab;
@@ -56,7 +56,7 @@ public class Hero : MonoBehaviour
     private void Start()
     {
         GameObject gObject = GameObject.Find("Star");
-
+        
         if (gObject != null)
         {
             star = gObject.GetComponent<RawImage>();
@@ -114,8 +114,8 @@ public class Hero : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _mat.color = _colors[index % 2];
-        index++;
+        _mat.color = _colors[_index % 2];
+        _index++;
 
     }
    

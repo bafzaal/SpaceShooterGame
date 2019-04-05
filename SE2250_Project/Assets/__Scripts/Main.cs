@@ -23,8 +23,6 @@ public class Main : MonoBehaviour
     //determines how often each powerup will be created:
     public PowerUpType[] powerUpFrequency = new PowerUpType[] { PowerUpType.speed, PowerUpType.invincible };
 
-
-
     private BoundsCheck _bndCheck; // Private variable for bounds check is declared
 
 

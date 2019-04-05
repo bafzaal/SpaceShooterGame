@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private BoundsCheck bndCheck;
+    private BoundsCheck _bndCheck;
     private Renderer _rend; 
 
     [Header("Set Dynamically")]
@@ -27,14 +27,14 @@ public class Projectile : MonoBehaviour
 
     void Awake()
     { //initialize components
-        bndCheck = GetComponent<BoundsCheck>();
+        _bndCheck = GetComponent<BoundsCheck>();
         _rend = GetComponent<Renderer>();
         rigidBody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        if (bndCheck.offUp) //boundscheck
+        if (_bndCheck.offUp) //boundscheck
         {
             Destroy(gameObject); // Destroys the gameObject
         }
