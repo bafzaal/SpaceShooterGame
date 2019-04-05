@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_3 : Enemy
 {
-    private bool turnedThreeBlue = false;
+    private bool _turnedFourBlue = false;
    
     public override void Move() // This Move function overrides the one in the Enemy class since it was virtual
     {
@@ -27,7 +27,7 @@ public class Enemy_3 : Enemy
         if (Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value >= 100f)
         {
          
-            turnedThreeBlue = true;
+            _turnedFourBlue = true;
             speed = 4;
             foreach (Material m in materials) // For every m in "materials" the following happens
             {
@@ -40,14 +40,14 @@ public class Enemy_3 : Enemy
 
     public override void UnShowDamage()
     {
-        if (turnedThreeBlue)
+        if (_turnedFourBlue)
         {
             for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
             {
                 materials[i].color = Color.blue; // material color is set to the color that is in originalColors array
             }
         }
-        else if (turnedThreeBlue == false)
+        else if (_turnedFourBlue == false)
         {
             for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
             {
