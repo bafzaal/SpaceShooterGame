@@ -5,19 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class MenuControl : MonoBehaviour
 {
-    public void ButtonStart()
+    public void ButtonStart() // Function used for on button press
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1); // Loads the first scene which is the scene in which the game is played
     }
 
-    public void IntructionsStart()
+    public void IntructionsStart()// Function used for on button press
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(2); // Loads the scene in which the intructions are held
     }
 
-    public void CreditStart()
+    public void CreditStart() // Function used for on button press
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(3); // Loads the scene in which the credits are held
     }
         
 }

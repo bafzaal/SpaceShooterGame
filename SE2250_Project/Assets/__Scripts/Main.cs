@@ -16,12 +16,12 @@ public class Main : MonoBehaviour
     private GameObject _levelImage; // The image for the background of the text
     private bool _doingSetUp; // bool to identify if setup is in progress or not
     static public int LEVEL = 1; // Current level indicator
-    public bool isLevel2 = false;
+    public bool isLevel2 = false; // bool to keep track of level
     public float enemyDefaultPadding = 1.5f; // The enemy default badding is 1.5
     public WeaponDefinition[] weaponDefinitions; //uses enum for properties
     public GameObject prefabPowerUp; //holds prefabs for powerups
     //determines how often each powerup will be created:
-    public PowerUpType[] powerUpFrequency = new PowerUpType[] { PowerUpType.speed, PowerUpType.invincible };
+    public PowerUpType[] powerUpFrequency = new PowerUpType[] { PowerUpType.speed, PowerUpType.invincible }; // array to keep track of powerups
     private BoundsCheck _bndCheck; // Private variable for bounds check is declared
 
 
@@ -60,29 +60,30 @@ public class Main : MonoBehaviour
             WEAP_DICT[def.type] = def;
         }
 
-        InitGame();
+        InitGame(); // Call the initialize game function
 
     }
 
-    void InitGame()
+    void InitGame() // Initialize game is called at the start of a new level
     {
        
 
-        _doingSetUp = true;
-        if(LEVEL == 1)
+        _doingSetUp = true; // since set up is happenening the bool is set to true
+        if(LEVEL == 1) // if the level is 1
         {
-            _levelImage = GameObject.Find("LevelImage");
-            _levelText = GameObject.Find("LevelText").GetComponent<Text>();
+            _levelImage = GameObject.Find("LevelImage"); // Level image is initialized
+            _levelText = GameObject.Find("LevelText").GetComponent<Text>(); // Level text is initialized
         }
-        _levelText.text = "LEVEL: " + LEVEL;
-        _levelImage.SetActive(true);
-        _levelText.gameObject.SetActive(true);
-        Invoke("HideLevelImage", levelStartDelay);
+        _levelText.text = "LEVEL: " + LEVEL; // level text displays the current level based on the variable
+        _levelImage.SetActive(true); // the level image is activated
+        _levelText.gameObject.SetActive(true); // level text is activated
+        Invoke("HideLevelImage", levelStartDelay); // The HideLevelImage is invoked based on the delay
     }
 
    
-    private void HideLevelImage()
+    private void HideLevelImage() // Function used to hide all images
     {
+        //images decativated and set up bool is set to false
         _levelImage.SetActive(false);
         _levelText.gameObject.SetActive(false);
         _doingSetUp = false;
@@ -91,7 +92,7 @@ public class Main : MonoBehaviour
     public void SpawnEnemy() // SpawnEnemy function is public and returns void (returns nothing)
     {
         int ndx;
-        if(LEVEL == 1)
+        if(LEVEL == 1) 
             ndx = Random.Range(0, prefabEnemies.Length - 1); // ndx variable holds a number from 0 to the amount of prefabEnemies
         else
             ndx = Random.Range(0, prefabEnemies.Length);
@@ -141,10 +142,10 @@ public class Main : MonoBehaviour
     {
         if (_doingSetUp)
             return;
-        if(LEVEL == 2 && isLevel2 != true)
-        {
-            Awake();
-            isLevel2 = true;
+        if(LEVEL == 2 && isLevel2 != true) //if the level is set to from score manager
+        {                                   // but the bool has not been changed to true yet
+            Awake(); // awake function is called
+            isLevel2 = true; // is level 2 is set to true
         }
     }
 }

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Enemy_1 : Enemy
 {
-    protected float enemyTwoTime = 0;
-    private bool _turnedTwoBlue = false;
+    private bool _turnedTwoBlue = false; // bool to keep track of enemy being turned blue
     private int _randomDirection; // Private integer called _randomDirection will help the enemy move in a random direction
 
     void Start()
@@ -34,11 +33,11 @@ public class Enemy_1 : Enemy
         pos = tempPos; // pos is set to the tempPos vector that holds the new positions 
         if (Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value >= 100f)
         {
-            _turnedTwoBlue = true;
+            _turnedTwoBlue = true; // If enemy is turned blue
             speed = 0;
             foreach (Material m in materials) // For every m in "materials" the following happens
             {
-                m.color = Color.blue; // The color is set to white to show the damage
+                m.color = Color.blue; // The color is set to blue
             }
 
         }
@@ -49,7 +48,7 @@ public class Enemy_1 : Enemy
         {
             for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
             {
-                materials[i].color = Color.blue; // material color is set to the color that is in originalColors array
+                materials[i].color = Color.blue; // material color is set to blue
             }
         }
         else if (_turnedTwoBlue == false)

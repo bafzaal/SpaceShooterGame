@@ -870,6 +870,7 @@ MonoBehaviour:
       type: 3}
     projectileColor: {r: 1, g: 1, b: 1, a: 1}
     damageOnHit: 1
+    continuousDamage: 0
     delayBetweenShots: 0.2
     velocity: 50
   - type: 2
@@ -879,6 +880,7 @@ MonoBehaviour:
       type: 3}
     projectileColor: {r: 0.078431375, g: 0.5882353, b: 1, a: 1}
     damageOnHit: 1
+    continuousDamage: 0
     delayBetweenShots: 0.4
     velocity: 50
   - type: 3
@@ -887,6 +889,7 @@ MonoBehaviour:
     projectilePrefab: {fileID: 0}
     projectileColor: {r: 1, g: 1, b: 1, a: 1}
     damageOnHit: 0
+    continuousDamage: 0
     delayBetweenShots: 0
     velocity: 0
   prefabPowerUp: {fileID: 5911566561855312862, guid: bfe5e2179d1b64c8fa18d235534d8414,

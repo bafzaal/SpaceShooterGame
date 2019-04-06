@@ -23,6 +23,7 @@ public class WeaponDefinition
     public GameObject projectilePrefab; //Prefab for projectiles
     public Color projectileColor = Color.white; 
     public float damageOnHit = 0; //Amount of damage caused
+    public float continuousDamage = 0;//Damage per second
     public float delayBetweenShots = 0; // DelaryBetweenShots float variable is initialized to zero
     public float velocity = 20; //speed of projectiles
 }
@@ -40,7 +41,7 @@ public class Weapon : MonoBehaviour
 
     private int _currWeaponNumber = 0; // New private int _currWeaponNumber is initialized to zero, this varibale will help switch weapons.
 
-    public GameObject explosionPrefab;
+    public GameObject explosionPrefab;// animation effect
 
     void Start()
     {
@@ -120,39 +121,39 @@ public class Weapon : MonoBehaviour
             case WeaponType.spread: //single projectile
                 weaponProjectile = MakeProjectile(); //calls function
                 weaponProjectile.rigidBody.velocity = velocity; //initialize velocity of projectile
-                StartCoroutine(Explosion(weaponProjectile, 0.05f));
+                StartCoroutine(Explosion(weaponProjectile, 0.05f)); //delay explosion effect of projectile
                 break;
 
             case WeaponType.blaster: //3 types of proejctiles created if it is a spread
                 weaponProjectile = MakeProjectile(); //Make middle projectile
                 weaponProjectile.rigidBody.velocity = velocity; //initialize velocity
-                StartCoroutine(Explosion(weaponProjectile, 0.06f));
+                StartCoroutine(Explosion(weaponProjectile, 0.06f)); //delay explosion effect of projectile
 
                 weaponProjectile = MakeProjectile(); //Make right projectile
                 weaponProjectile.transform.rotation = Quaternion.AngleAxis(30, Vector3.back);
                 weaponProjectile.rigidBody.velocity = weaponProjectile.transform.rotation * velocity;
-                StartCoroutine(Explosion(weaponProjectile, 0.06f));
+                StartCoroutine(Explosion(weaponProjectile, 0.06f)); //delay explosion effect of projectile
 
                 weaponProjectile = MakeProjectile(); //Make left projectile
                 weaponProjectile.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 weaponProjectile.rigidBody.velocity = weaponProjectile.transform.rotation * velocity;
-                StartCoroutine(Explosion(weaponProjectile, 0.06f));
+                StartCoroutine(Explosion(weaponProjectile, 0.06f)); //delay explosion effect of projectile
                 break;
         }
 
 
        
     }
-    IEnumerator Explosion(Projectile wP, float delayTime)
+    IEnumerator Explosion(Projectile wP, float delayTime) //explosion effect of projectiles
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(delayTime); //delay effect so that projectiles animation effect is infront of hero ship
 
         if (wP != null)
         {
-            GameObject explosion = Instantiate(explosionPrefab, wP.transform.position, Quaternion.identity) as GameObject;
+            GameObject explosion = Instantiate(explosionPrefab, wP.transform.position, Quaternion.identity) as GameObject; //create effect
 
-                explosion.transform.SetParent(EFFECTS_ANCHOR, true);
-                Destroy(explosion, 0.07f);
+                explosion.transform.SetParent(EFFECTS_ANCHOR, true); //place effect in anchor
+                Destroy(explosion, 0.07f); //destroy effect after time
        
         }
     }
@@ -179,7 +180,7 @@ public class Weapon : MonoBehaviour
         //places it under the _ProjectileAnchor in hierarchy pane to keep it clean:
         gObject.transform.SetParent(EFFECTS_ANCHOR, true);
         Projectile projectile = gObject.GetComponent<Projectile>();
-        projectile.type = type;
+        projectile.type = type; 
         //lastShotTime is set to current time it follows the delayBetweenShots:
         lastShotTime = Time.time; 
         return (projectile); //return object reference of Projectile

@@ -6,16 +6,16 @@ public class BoundsCheck : MonoBehaviour
 {
 
     [Header("Set in Inspector")]
-    public float radius = 1f;
+    public float radius = 1f; // Radius of 1
     public bool keepOnScreen = true; //Allows to choose whether it stays on screen or not
 
     [Header("Set Dynamically")]
-    public bool isOnScreen = true;
-    public float camWidth;
+    public bool isOnScreen = true; // isOnScreen bool to keep track of game object
+    public float camWidth; 
     public float camHeight;
 
     [HideInInspector]
-    public bool offRight, offLeft, offUp, offDown;
+    public bool offRight, offLeft, offUp, offDown; // bools to keep track of game object
 
     void Awake()
     {

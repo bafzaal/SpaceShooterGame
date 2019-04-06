@@ -27,13 +27,13 @@ public class PowerUp : MonoBehaviour
     public float birthTime; 
 
     private Rigidbody _rigid; //private vars
-    private BoundsCheck _bndCheck;
-    public Material fast, star;
+    private BoundsCheck _bndCheck; 
+    public Material fast, star; //materials for each powerup
 
     void Awake()
     {
         //Find the Cube reference
-        cube = transform.Find("Cube").gameObject;
+        cube = transform.Find("Cube").gameObject; //find power up prefab in hierarchy
         _rigid = GetComponent<Rigidbody>();
         _bndCheck = GetComponent<BoundsCheck>();
       
@@ -90,16 +90,16 @@ public class PowerUp : MonoBehaviour
 
     public void setType(PowerUpType puT)
     {
-        if (puT ==PowerUpType.speed)
+        if (puT ==PowerUpType.speed) //if its a speed powerup
        {
-            cube.GetComponent<Renderer>().material = fast;
-            type = puT;
+            cube.GetComponent<Renderer>().material = fast;//change material of it
+            type = puT; //set type of powerup
         }
 
-        if (puT == PowerUpType.invincible)
+        if (puT == PowerUpType.invincible) //if its an invincible powerup
         {
-            cube.GetComponent<Renderer>().material = star;
-            type = puT;
+            cube.GetComponent<Renderer>().material = star; //change material of it
+            type = puT;//set type of powerup
         }
 
     }

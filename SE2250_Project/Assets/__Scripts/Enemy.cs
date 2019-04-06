@@ -24,8 +24,7 @@ public class Enemy : MonoBehaviour
     public bool notifiedOfDestruction = false; // Will be used later
     private BoundsCheck _bndCheck; // Private bounds check variable
 
-    protected float enemyOneTime = 0;
-    private bool turnedOneBlue = false;
+    private bool turnedOneBlue = false; // bool to keep track if enemy was turned blue
   
 
      void Awake()
@@ -40,10 +39,6 @@ public class Enemy : MonoBehaviour
         {
             originalColors[i] = materials[i].color; // Puts material colors into origionalColors array
         }
-    }
-    
-    void Start()
-    {
     }
 
     // This is a Property: A method that acts like a field
@@ -67,11 +62,11 @@ public class Enemy : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value>=100f)
         {
 
-            turnedOneBlue = true;
+            turnedOneBlue = true; // since color is now blue bool is true
             speed = 0;
             foreach (Material m in materials) // For every m in "materials" the following happens
             {
-                m.color = Color.blue; // The color is set to white to show the damage
+                m.color = Color.blue; // The color is set to blue
             }
         }
             
@@ -93,6 +88,8 @@ public class Enemy : MonoBehaviour
                 }
                 ShowDamage(); // Calls the ShowDamage() function
                 health -= Main.GetWeaponDefinition(weaponProjectile.type).damageOnHit; // Health is decreased in case of a collision with projectile
+                health -= Main.GetWeaponDefinition(weaponProjectile.type).continuousDamage;
+
                 if (health <= 0)
                 {
                     //tell the main singleton that this ship was destroyed
@@ -127,9 +124,9 @@ public class Enemy : MonoBehaviour
                         AudioSource.PlayClipAtPoint(explosionClip, new Vector3(5, 1, 2)); // creates an audio source but automatically disposes of it once the clip has finished playing
                         Destroy(this.gameObject);
                     }
-                    GameObject explosion = Instantiate(explosionPrefab, this.gameObject.transform.position, Quaternion.identity) as GameObject;
-                    explosion.transform.SetParent(Weapon.EFFECTS_ANCHOR, true);
-                    Destroy(explosion, 2);
+                    GameObject explosion = Instantiate(explosionPrefab, this.gameObject.transform.position, Quaternion.identity) as GameObject; //explosion effect when enemy is destroyed
+                    explosion.transform.SetParent(Weapon.EFFECTS_ANCHOR, true); //put explosion effect in anchor
+                    Destroy(explosion, 2); //destroy effect after 2 seconds
 
 
                 }// Destroy this game object
@@ -181,11 +178,11 @@ public class Enemy : MonoBehaviour
 
     public virtual void UnShowDamage()
     {
-        if (turnedOneBlue)
+        if (turnedOneBlue) // If the color is blue (bool is true)
         {
             for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
             {
-                materials[i].color = Color.blue; // material color is set to the color that is in originalColors array
+                materials[i].color = Color.blue; // material color is set to blue
             }
         }
         else if (turnedOneBlue == false)

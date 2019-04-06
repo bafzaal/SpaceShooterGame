@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Enemy_2 : Enemy
 {
-    protected float enemyThreeTime = 0;
-    private float _holdX = 1;
-    private bool _turnedThreeBlue = false;
+    private float _holdX = 1; // float used to ensure enemy doesnt move in x direc when frozen
+    private bool _turnedThreeBlue = false; // bool to keep track of enemy being turned blue
     public override void Move() // This Move function overrides the one in the Enemy class since it was virtual
     {
 
@@ -17,12 +16,12 @@ public class Enemy_2 : Enemy
 
         if (Input.GetKeyDown(KeyCode.B) && FreezeSlider.slide.value >= 100f)
         {
-            speed = 0;
-           _holdX = 0;
+            speed = 0; // speed is set to zero to freeze the enemy
+           _holdX = 0; // _holdX is set to 0 to prevent movement in the x direction
            _turnedThreeBlue = true;
             foreach (Material m in materials) // For every m in "materials" the following happens
             {
-                m.color = Color.blue; // The color is set to white to show the damage
+                m.color = Color.blue; // The color is set to blue
             }
         }
     }
@@ -32,7 +31,7 @@ public class Enemy_2 : Enemy
         {
             for (int i = 0; i < materials.Length; i++) // loop continues from i = 0 until it reaches the size of "materials"
             {
-                materials[i].color = Color.blue; // material color is set to the color that is in originalColors array
+                materials[i].color = Color.blue; // material color is set to blue
             }
         }
         else if (_turnedThreeBlue == false)

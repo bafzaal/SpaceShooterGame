@@ -32,9 +32,9 @@ public class ScoreCounter : MonoBehaviour
         scoreText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 1.4f,0)); //adjusts score when screen size is changed
         highScoreText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 1, 0)); //adjusts highscore when screen size is change
     
-        if(CURR_SCORE >= 1500 && Main.LEVEL != 0)
+        if(CURR_SCORE >= 1500 && Main.LEVEL != 0) //if score is greater or equal to 1500
         {
-            Main.LEVEL = 2;
+            Main.LEVEL = 2; //level is set to 2
         }
 
 
