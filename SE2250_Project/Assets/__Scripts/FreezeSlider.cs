@@ -25,7 +25,7 @@ public class FreezeSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (slide != null)
         slide.value += 0.04f; // Slide value is increased every frame
 
 

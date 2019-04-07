@@ -29,6 +29,7 @@ public class PowerUp : MonoBehaviour
     private Rigidbody _rigid; //private vars
     private BoundsCheck _bndCheck; 
     public Material fast, star; //materials for each powerup
+    private Renderer _cubeRend;
 
     void Awake()
     {
@@ -36,7 +37,7 @@ public class PowerUp : MonoBehaviour
         cube = transform.Find("Cube").gameObject; //find power up prefab in hierarchy
         _rigid = GetComponent<Rigidbody>();
         _bndCheck = GetComponent<BoundsCheck>();
-      
+        _cubeRend = cube.GetComponent<Renderer>();
 
         //Set a random velocity
         Vector3 vel = Random.onUnitSphere; //Get Random XYZ velocity
@@ -81,10 +82,20 @@ public class PowerUp : MonoBehaviour
             return;
         }
 
+        if (u > 0)
+        {
+           
+                Color c = _cubeRend.material.color;//store material color
+                c.a = 1f - u;//reduce alpha value of color variable(makes it transparent)
+                _cubeRend.material.color = c;//assign it to the cube
+
+
+
+        }
         if (!_bndCheck.isOnScreen)
         {
             //If the PowerUp has drifted entirely off the screen, destroy it
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 

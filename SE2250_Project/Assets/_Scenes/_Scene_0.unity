@@ -892,7 +892,7 @@ MonoBehaviour:
     continuousDamage: 0
     delayBetweenShots: 0
     velocity: 0
-  prefabPowerUp: {fileID: 5911566561855312862, guid: bfe5e2179d1b64c8fa18d235534d8414,
+  prefabPowerUp: {fileID: 2877139617930375309, guid: 26703c441bb778c42b9d7ff69156e58c,
     type: 3}
   powerUpFrequency: 0000000001000000
 --- !u!114 &534669907
