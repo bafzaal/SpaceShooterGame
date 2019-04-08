@@ -16,7 +16,7 @@ public class Main : MonoBehaviour
     private GameObject _levelImage; // The image for the background of the text
     private bool _doingSetUp; // bool to identify if setup is in progress or not
     static public int LEVEL = 1; // Current level indicator
-    public bool isLevel2 = false; // bool to keep track of level
+    public static bool isLevel2 = false; // bool to keep track of level
     public float enemyDefaultPadding = 1.5f; // The enemy default badding is 1.5
     public WeaponDefinition[] weaponDefinitions; //uses enum for properties
     public GameObject prefabPowerUp; //holds prefabs for powerups

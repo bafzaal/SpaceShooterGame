@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour
             
     }
 
+
     void OnCollisionEnter(Collision collision)
     {
         GameObject otherGO = collision.gameObject; // Creates a new GameObject called otherGO and is set to the collision gameObject
@@ -165,6 +166,12 @@ public class Enemy : MonoBehaviour
             // Enemy has gone off the bottom of the screen so destroy it
             Destroy(gameObject);
         }
+
+        if(Main.LEVEL == 2 && Main.isLevel2 != true)
+        {
+            Destroy(this.gameObject);
+        }
+
     }
     void ShowDamage()
     {
