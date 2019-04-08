@@ -70,7 +70,7 @@ public class Hero : MonoBehaviour
             fast.gameObject.SetActive(false);
         }
      flame1= GameObject.Find("Flame1"); //finds hero components for exhaust
-     flame2 = GameObject.Find("Flame2");
+     flame2= GameObject.Find("Flame2");
 
     }
 
@@ -107,7 +107,7 @@ public class Hero : MonoBehaviour
 
         _timer += Time.deltaTime; //update timer
 
-        if (_timer > 12.0f) //if timer is >12, invincible is stopped and power up image is gone
+        if (_timer > 7.0f) //if timer is >7, invincible is stopped and power up image is gone
         {
             _timer = 0f;
             speed = 30f;
